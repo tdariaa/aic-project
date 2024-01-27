@@ -1,0 +1,14 @@
+{
+  "extends": ["react-app", "react-app/jest"],
+  "rules": {
+    "no-console": "warn",
+    "no-lonely-if": "warn",
+    "import/prefer-default-export": "off",
+    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }],
+    "no-unused-expressions": "warn",
+    "import/order": [
+      "warn",
+      { "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"] },
+    ],
+  },
+}
