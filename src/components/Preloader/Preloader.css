@@ -1,0 +1,29 @@
+@keyframes rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.preloader {
+  height: 100px;
+  width: 100px;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.preloader::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 7px solid transparent;
+  border-top-color: white;
+  border-bottom-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate 1s linear infinite;
+}

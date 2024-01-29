@@ -1,15 +1,13 @@
 import { Header } from '../../components/Header/Header';
-import { SearchForm } from '../../components/SearchForm/SearchForm';
 import { CardSection } from '../../components/CardSection/CardSection';
 
-import './MainPage.css';
+import './HistoryPage.css';
 
-export const MainPage = () => {
+export const HistoryPage = () => {
   return (
     <>
       <Header />
       <main className='main'>
-        <SearchForm />
         <CardSection />
       </main>
     </>

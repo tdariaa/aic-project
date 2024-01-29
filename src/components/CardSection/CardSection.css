@@ -1,4 +1,4 @@
-.card-area {
+/* .card-area {
   width: 100%;
   min-height: 100vh;
   padding: 50px;
@@ -12,4 +12,19 @@
   flex-grow: 1;
   align-content: flex-start;
   justify-items: center;
+} */
+
+.card-area {
+  width: 100%;
+  min-height: min-content;
+  padding: 50px;
+  box-sizing: border-box;
+  display: flex;
+  column-gap: 30px;
+  row-gap: 30px;
+  justify-content: center;
+  align-content: flex-start;
+  justify-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
 }

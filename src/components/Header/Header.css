@@ -7,12 +7,14 @@
   width: 60px;
   height: 60px;
   font-size: 12px;
+  font-weight: 600;
   color: #575756;
   text-transform: uppercase;
   margin: 0;
   border: 1px solid;
   display: flex;
   align-items: flex-end;
+  text-decoration: none;
 }
 
 .header__logo {
@@ -29,9 +31,15 @@
   display: flex;
   justify-content: space-around;
   top: 0px;
-  background: #20222a83;
   box-shadow: 0 0 5px 1px #090a0ccb;
   backdrop-filter: blur(3px);
+}
+
+.header__content_dark {
+  background: #20222a83;
+}
+.header__content_light {
+  background: #fff4dae8;
 }
 
 .header__nav {
@@ -43,7 +51,7 @@
 .header__links {
   list-style: none;
   margin: 0;
-  padding: .2em 2em;
+  padding: 0.2em 2em;
   float: right;
   padding-right: 42px;
 }
@@ -51,16 +59,17 @@
 .header__link {
   display: inline-block;
   margin: 0;
-  padding: .2em .7em;
+  padding: 0.2em 0.7em;
   letter-spacing: 1px;
   font-size: 14px;
   margin-left: 20px;
   font-weight: 600;
   box-shadow: inset 0px -10px 0px rgba(white, 0.5);
-  transition: all 0.4s ease, transform 0.2s ease;
+  transition:
+    all 0.4s ease,
+    transform 0.2s ease;
   padding: 2px 4px;
   transform: translateY(0px);
-
 }
 
 .header__link:hover {
@@ -73,11 +82,9 @@
   height: 100%;
   color: #575756;
   text-decoration: none;
-  font-family: Ubuntu;
-  font-size: 1.15em;
+  font-size: 12px;
   font-weight: lighter;
-  letter-spacing: 1px;
-  transition: .25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
 .header__theme {
@@ -91,14 +98,17 @@
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  padding: 3px;
-  border: solid 0.5px rgba(255, 255, 255, 0.3);;
-}
+  padding: 12px;
 
-.header__theme_dark {
-  background-image: url("../../images/sun-1-svgrepo-com.svg");
+  background-color: transparent;
 }
 
 .header__theme_light {
-  background-image: url("../../images/sun-2-svgrepo-com.svg");
+  background-image: url('../../images/moon-svgrepo-com.svg');
+  border: solid 0.5px rgb(87, 87, 86);
+}
+
+.header__theme_dark {
+  background-image: url('../../images/sun-2-svgrepo-com.svg');
+  border: solid 0.5px rgba(255, 255, 255, 0.3);
 }

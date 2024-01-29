@@ -3,6 +3,17 @@
 @import url(./components/Header/Header.css);
 
 .page {
+  /* background_light:
+    radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #fff4da 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #fff4da 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #fff4da 68% 70%, #0000 72%) 0 0 / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #fff4da 68% 70%, #0000 72%) 0 0 / calc(2 * 50px) calc(2 * 50px),
+    repeating-conic-gradient(#baae91 0 25%, #0000 0 50%) 0 0 / calc(2 * 50px) calc(2 * 50px),
+    radial-gradient(#0000 66%, #fff4da 68% 70%, #0000 72%) 0 calc(50px / 2) / 50px 50px #baae91; */
+
   background:
     radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #20222a 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
       calc(2 * 50px),
@@ -20,6 +31,7 @@
   min-height: 100vh;
   position: relative;
   width: 100%;
+  font-family: 'Comfortaa', 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-size: 0;
   color: #919191;
 }

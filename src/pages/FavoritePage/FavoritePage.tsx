@@ -1,15 +1,13 @@
 import { Header } from '../../components/Header/Header';
-import { SearchForm } from '../../components/SearchForm/SearchForm';
 import { CardSection } from '../../components/CardSection/CardSection';
 
-import './MainPage.css';
+import './FavoritePage.css';
 
-export const MainPage = () => {
+export const FavoritePage = () => {
   return (
     <>
       <Header />
       <main className='main'>
-        <SearchForm />
         <CardSection />
       </main>
     </>
