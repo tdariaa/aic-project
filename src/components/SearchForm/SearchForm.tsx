@@ -1,60 +1,79 @@
+import React from 'react';
+import { useNavigate } from 'react-router';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { useGetArtworkByIdQuery, useGetArtworkBySearchQuery } from '../../store/api/api';
+import { addHistoryItem } from '../../store/slice/historySlice';
+
 import './SearchForm.css';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const SearchForm = () => {
+  const dispatch = useAppDispatch()();
+  const [value, setValue] = React.useState('');
+  const debouncedSearchTerm = useDebounce(value, 500);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const { data: items } = useGetArtworkBySearchQuery(debouncedSearchTerm, { skip: value.trim().length < 0 });
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    setValue('');
+  }, []);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(addHistoryItem(value));
+    setIsOpen(false);
+    navigate(`/search/?query=${value}`);
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target) {
+      setValue(() => e.target.value);
+      setIsOpen(true);
+    }
+  };
+
+  const handleClick = (title: string, id: string) => {
+    dispatch(addHistoryItem(title));
+    navigate(`/element/${id}`);
+    setIsOpen(false);
+  };
+
   return (
     <section className='search'>
-      <form className='search__container'>
+      <form className='search__container' onSubmit={handleSubmit}>
         <div className='sarch__line'>
-          <input className='search__input' type='text' placeholder='Search' />
+          <input
+            className='search__input'
+            type='text'
+            placeholder='Search'
+            value={value || ''}
+            onChange={handleChange}
+            onFocus={() => setIsOpen(true)}
+          />
           <button className='search__button'></button>
         </div>
-        <div className='search__radio-container'>
-          <ul className='search__radios-list'>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioOne' defaultValue='Print' />
-              <label htmlFor='radioOne'>Print</label>
-            </li>
-            <li>
-              <input
-                className='search__radio'
-                type='radio'
-                name='radio'
-                id='radioTwo'
-                defaultValue='Drawing and Watercolo'
-              />
-              <label htmlFor='radioTwo'>Drawing and Watercolo</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioThree' defaultValue='Painting' />
-              <label htmlFor='radioThree'>Painting</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioFour' defaultValue='Mask' />
-              <label htmlFor='radioFour'>Mask</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioFive' defaultValue='Photograph' />
-              <label htmlFor='radioFive'>Photograph</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioSix' defaultValue='Vessel' />
-              <label htmlFor='radioSix'>Vessel</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioSeven' defaultValue='Textile' />
-              <label htmlFor='radioSeven'>Textile</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioEight' defaultValue='Book' />
-              <label htmlFor='radioEight'>Book</label>
-            </li>
-            <li>
-              <input className='search__radio' type='radio' name='radio' id='radioNine' defaultValue='Sculpture' />
-              <label htmlFor='radioNine'>Sculpture</label>
-            </li>
-          </ul>
-        </div>
       </form>
+      <div className={`search__overlay ${isOpen ? 'search__overlay_open' : ''}`} onClick={() => setIsOpen(false)}></div>
+      <div className={`search__popup ${isOpen ? 'search__popup_open' : ''}`}>
+        {items?.cards.length ? (
+          <ul className='search__list'>
+            {items?.cards.map((item) => (
+              <li
+                className='search__item'
+                key={item.id}
+                onClick={() => {
+                  handleClick(item.title, item.id);
+                }}
+              >
+                <p className='search__title'>{item.title}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className='search__title'>No result</p>
+        )}
+      </div>
     </section>
   );
 };

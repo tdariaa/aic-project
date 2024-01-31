@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 interface ThemeContextInterface {
   theme: boolean;
@@ -22,6 +23,10 @@ const ThemeContextProvider: React.FC<ThemeContextProps> = ({ children }) => {
 
   const value = React.useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+};
+
+ThemeContextProvider.propTypes = {
+  children: PropTypes.node,
 };
 
 export { ThemeContext, ThemeContextProvider };

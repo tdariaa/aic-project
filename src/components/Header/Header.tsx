@@ -17,6 +17,16 @@ export const Header = () => {
         <nav className='header__nav'>
           <ul className='header__links'>
             <li className='header__link'>
+              <Link to='/history' className='header__link-a'>
+                history
+              </Link>
+            </li>
+            <li className='header__link'>
+              <Link to='/favorite' className='header__link-a'>
+                favorite
+              </Link>
+            </li>
+            <li className='header__link'>
               <Link to='/' className='header__link-a'>
                 Главная
               </Link>

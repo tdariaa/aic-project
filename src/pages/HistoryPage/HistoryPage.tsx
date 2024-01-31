@@ -1,6 +1,6 @@
 import { Header } from '../../components/Header/Header';
-import { CardSection } from '../../components/CardSection/CardSection';
-
+import { SearchForm } from '../../components/SearchForm/SearchForm';
+import { History } from '../../components/History/Histoty';
 import './HistoryPage.css';
 
 export const HistoryPage = () => {
@@ -8,7 +8,8 @@ export const HistoryPage = () => {
     <>
       <Header />
       <main className='main'>
-        <CardSection />
+        <SearchForm />
+        <History />
       </main>
     </>
   );

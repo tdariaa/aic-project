@@ -1,3 +1,19 @@
+.card__list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: min-content;
+  box-sizing: border-box;
+  column-gap: 30px;
+  row-gap: 30px;
+  justify-content: center;
+  align-content: flex-start;
+  justify-items: center;
+  flex-direction: row;
+}
+.card__item {
+  list-style: none;
+}
 .card {
   width: 250px;
   height: 300px;

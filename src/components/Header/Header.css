@@ -1,6 +1,6 @@
 .header {
   height: 72px;
-  z-index: 2;
+  z-index: 10;
 }
 
 .header__title {
@@ -111,4 +111,9 @@
 .header__theme_dark {
   background-image: url('../../images/sun-2-svgrepo-com.svg');
   border: solid 0.5px rgba(255, 255, 255, 0.3);
+}
+
+.header__theme:hover {
+  transform: translateY(-5px);
+  box-shadow: inset 0px -25px 0px rgba(255, 255, 255, 0.3);
 }
