@@ -1,4 +1,3 @@
-// import { createSlice } from '@reduxjs/toolkit';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
 
@@ -22,14 +21,8 @@ export const historySlice = createSlice({
     deleteHistoryItem(state, action: PayloadAction<string>) {
       state.historyQuery = state.historyQuery.filter((item) => item !== action.payload);
     },
-    deleteHistoryAll(state) {
-      state.historyQuery = [];
-    },
   },
 });
 
-export const { addHistoryItem, deleteHistoryItem, deleteHistoryAll } = historySlice.actions;
+export const { addHistoryItem, deleteHistoryItem } = historySlice.actions;
 export default historySlice.reducer;
-// export const historyData = (state: RootState) => state.history.historyQuery;
-
-// export const { useGetHistoryQuery } = historySlice;

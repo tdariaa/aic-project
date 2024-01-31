@@ -7,6 +7,8 @@ import { SearchForm } from '../../components/SearchForm/SearchForm';
 import './History.css';
 import { ReactNode } from 'react';
 import { deleteHistoryItem } from '../../store/slice/historySlice';
+import React from 'react';
+import { useNavigate } from 'react-router';
 
 interface Ihistory {
   post: string;
@@ -15,35 +17,36 @@ interface Ihistory {
 
 const HistoryPosts: React.FC<Ihistory> = ({ post }) => {
   const dispatch = useAppDispatch()();
+  const navigate = useNavigate();
   // const handleDeletePost = (key:number) => {
   //   dispatch(deleteHistoryItem(key));
   // }
 
-  const handleDeletePost = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const historyItemId = e.target as HTMLDivElement;
-    console.log(historyItemId);
+  const handleDeletePost = (post: string) => {
+    // const historyItemId = e.target;
+    console.log(post);
     // console.log(historyItemId);
     // if (historyItemId) {
-    //   dispatch(deleteHistoryItem(historyItemId));
+    dispatch(deleteHistoryItem(post));
     // }
   };
   // console.log(post);
   return (
-    <div className='history__post' onClick={handleDeletePost}>
-      <p>{post}</p>
-      <button className='history__button'>X</button>
-    </div>
+    <li className='history__item'>
+      <div className='history__post' onClick={() => navigate(`/search/?query=${post}`)}>
+        <p>{post}</p>
+      </div>
+      <button className='history__button' onClick={() => handleDeletePost(post)}>
+        X
+      </button>
+    </li>
   );
 };
 
 export const History = () => {
   const historyList = useAppSelector((state) => state.history.historyQuery);
   console.log(historyList);
-  const content = historyList.map((post: string, index: number) => (
-    <li className='history__item' key={index}>
-      <HistoryPosts post={post} />
-    </li>
-  ));
+  const content = historyList.map((post: string, index: number) => <HistoryPosts post={post} key={index} />);
 
   return (
     <section className='history'>

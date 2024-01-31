@@ -25,6 +25,7 @@ export const SearchForm = () => {
     dispatch(addHistoryItem(value));
     setIsOpen(false);
     navigate(`/search/?query=${value}`);
+    setValue('');
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target) {
@@ -34,7 +35,7 @@ export const SearchForm = () => {
   };
 
   const handleClick = (title: string, id: string) => {
-    dispatch(addHistoryItem(title));
+    // dispatch(addHistoryItem(title));
     navigate(`/element/${id}`);
     setIsOpen(false);
   };

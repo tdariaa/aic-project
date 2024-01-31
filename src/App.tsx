@@ -26,12 +26,14 @@ const Item = React.lazy(() => import('./components/Item/Item').then((module) => 
 const SearchPage = React.lazy(() =>
   import('./pages/SearchPage/SearchPage').then((module) => ({ default: module.SearchPage })),
 );
+const Header = React.lazy(() => import('./components/Header/Header').then((module) => ({ default: module.Header })));
 
 function App() {
   return (
     <div className='page'>
       <Suspense fallback={<Preloader />}>
         {/* <ErrorBoundary fallback={<h1>Error</h1>}></ErrorBoundary> */}
+        <Header />
         <Routes>
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/signin' element={<SignInPage />} />
