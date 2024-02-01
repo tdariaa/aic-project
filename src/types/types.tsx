@@ -7,6 +7,7 @@ export interface AuthProps {
 }
 
 export interface ICard {
+  id: string;
   imgId: string;
   title: string;
   artistTitle: string;

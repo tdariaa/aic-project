@@ -7,15 +7,16 @@ import '../Card/Card.css';
 export const CardSection = () => {
   const { data: items, isLoading, isSuccess, isError, error } = useGetArtworksQuery('');
   let content;
-  // console.log(items);
 
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
+    console.log(items.cards);
     const data = items.cards.filter((card: IPictureItem) => card.image_id != null);
     content = data.map((card: IPictureItemAfterFilter) => (
       <li className='card__item' key={card.id}>
         <Card
+          id={card.id}
           imgId={card.image_id}
           title={card.title}
           artistTitle={card.artist_title}

@@ -10,12 +10,12 @@ interface ThemeContextProps {
   children: React.ReactNode;
 }
 
-const ThemeContext = React.createContext<ThemeContextInterface>({
+export const ThemeContext = React.createContext<ThemeContextInterface>({
   theme: true,
   toggleTheme: () => {},
 });
 
-const ThemeContextProvider: React.FC<ThemeContextProps> = ({ children }) => {
+export const ThemeContextProvider: React.FC<ThemeContextProps> = ({ children }) => {
   const [theme, setTheme] = React.useState(true);
   const toggleTheme = React.useCallback(() => {
     setTheme(!theme);
@@ -28,5 +28,3 @@ const ThemeContextProvider: React.FC<ThemeContextProps> = ({ children }) => {
 ThemeContextProvider.propTypes = {
   children: PropTypes.node,
 };
-
-export { ThemeContext, ThemeContextProvider };

@@ -10,20 +10,17 @@ interface PictureItem {
   provenance_text: string;
 }
 
-export interface PaginationItem {
-  current_page: number;
-  limit: number;
-  offset: number;
-  total: number;
-  total_pages: number;
-}
-
 interface ArtworksState {
   data: PictureItem[];
-  pagination: PaginationItem;
-  detail: PictureItem;
-  isLoadingArtworks: boolean;
-  isLoadingDetailArtwork: boolean;
+}
+
+interface PictureItemById extends PictureItem {
+  description: string;
+  artist_display: string;
+}
+
+interface ArtworksStateByID {
+  data: PictureItemById;
 }
 
 export const api = createApi({
@@ -38,6 +35,9 @@ export const api = createApi({
     }),
     getArtworkById: builder.query({
       query: (id) => `/artworks/${id}`,
+      transformResponse: (response: ArtworksStateByID) => ({
+        data: response.data,
+      }),
     }),
     getArtworkBySearch: builder.query({
       query: (request) => `https://api.artic.edu/api/v1/artworks/search?q=${request}`,

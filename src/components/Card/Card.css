@@ -46,32 +46,37 @@
 
 .card__button {
   background-color: transparent;
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-size: 20px 20px;
-  border: none;
+  /* width: 20px; */
+  /* height: 20px; */
+  /* background-repeat: no-repeat;
+  background-size: 20px 20px; */
+  border: #919191 1px solid;
   cursor: pointer;
-  margin: 10px 0 0 10px;
-  padding: 0;
+  margin: 10px 10px 0 10px;
+  padding: 5px;
   box-sizing: border-box;
   transition:
     all 0.4s ease,
     transform 0.2s ease;
   transform: translateY(0px);
   border-radius: 8px;
+  color: #919191;
+}
+
+.card__button:last-of-type {
+  margin-right: 0;
 }
 
 .card__button:hover {
   transform: translateY(-2px);
-  box-shadow: inset 0px -20px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0px -40px 0px rgba(255, 255, 255, 0.2);
 }
 
 .card__button:last-of-type {
   margin-left: 0;
 }
 
-.card__button_like {
+/* .card__button_like {
   background-image: url('../../images/add-square-svgrepo-com.svg');
 }
 
@@ -81,4 +86,4 @@
 
 .card__button_info {
   background-image: url('../../images/info-square-svgrepo-com.svg');
-}
+} */
