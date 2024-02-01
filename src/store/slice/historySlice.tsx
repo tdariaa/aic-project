@@ -3,7 +3,7 @@ import { RootState } from '..';
 
 type searchQuery = string;
 
-export interface IHistoryState {
+interface IHistoryState {
   historyQuery: searchQuery[];
 }
 
@@ -15,10 +15,10 @@ export const historySlice = createSlice({
   name: 'history',
   initialState: initialHistoryState,
   reducers: {
-    addHistoryItem(state, action: PayloadAction<string>) {
+    addHistoryItem(state, action: PayloadAction<searchQuery>) {
       state.historyQuery.unshift(action.payload);
     },
-    deleteHistoryItem(state, action: PayloadAction<string>) {
+    deleteHistoryItem(state, action: PayloadAction<searchQuery>) {
       state.historyQuery = state.historyQuery.filter((item) => item !== action.payload);
     },
   },

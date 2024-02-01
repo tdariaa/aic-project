@@ -1,7 +1,6 @@
 import './CardSection.css';
 import { useGetArtworksQuery } from '../../store/api/api';
 import { Card } from '../Card/Card';
-import { IPictureItem, IPictureItemAfterFilter } from '../../types/types';
 import '../Card/Card.css';
 
 export const CardSection = () => {
@@ -11,9 +10,8 @@ export const CardSection = () => {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
-    console.log(items.cards);
-    const data = items.cards.filter((card: IPictureItem) => card.image_id != null);
-    content = data.map((card: IPictureItemAfterFilter) => (
+    const data = items.cards.filter((card) => card.image_id != null);
+    content = data.map((card) => (
       <li className='card__item' key={card.id}>
         <Card
           id={card.id}
@@ -27,6 +25,7 @@ export const CardSection = () => {
   } else if (isError) {
     content = <div>{error.toString()}</div>;
   }
+
   return (
     <section className='card-area'>
       <ul className='card__list'>{content}</ul>

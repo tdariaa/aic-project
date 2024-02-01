@@ -1,27 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-interface PictureItem {
-  id: string;
-  image_id: string;
-  artist_title: string;
-  artwork_type_title: string;
-  date_display: string;
-  title: string;
-  provenance_text: string;
-}
-
-interface ArtworksState {
-  data: PictureItem[];
-}
-
-interface PictureItemById extends PictureItem {
-  description: string;
-  artist_display: string;
-}
-
-interface ArtworksStateByID {
-  data: PictureItemById;
-}
+import { IArtworksStateByID, IArtworksState } from '../../types/types';
 
 export const api = createApi({
   reducerPath: 'api',
@@ -29,19 +7,19 @@ export const api = createApi({
   endpoints: (builder) => ({
     getArtworks: builder.query({
       query: () => '/artworks?page=1&limit=13',
-      transformResponse: (response: ArtworksState) => ({
+      transformResponse: (response: IArtworksState) => ({
         cards: response.data,
       }),
     }),
     getArtworkById: builder.query({
       query: (id) => `/artworks/${id}`,
-      transformResponse: (response: ArtworksStateByID) => ({
+      transformResponse: (response: IArtworksStateByID) => ({
         data: response.data,
       }),
     }),
     getArtworkBySearch: builder.query({
       query: (request) => `https://api.artic.edu/api/v1/artworks/search?q=${request}`,
-      transformResponse: (response: ArtworksState) => ({
+      transformResponse: (response: IArtworksState) => ({
         cards: response.data,
       }),
     }),

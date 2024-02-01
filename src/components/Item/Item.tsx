@@ -1,15 +1,12 @@
 // import { useState } from 'react';
-import { useLocation, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useGetArtworkByIdQuery } from '../../store/api/api';
 import './Item.css';
 
 export const Item = () => {
   const param = useParams();
-  const { data, isLoading, isSuccess, isError, error } = useGetArtworkByIdQuery(param.id);
+  const { data, isLoading, isSuccess, isError } = useGetArtworkByIdQuery(param.id);
   let description;
-  console.log(data);
-  {
-  }
   if (isSuccess) {
     description = data.data.description?.replace(/<[^>]*>/g, '');
   }

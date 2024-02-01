@@ -27,6 +27,9 @@ const SearchPage = React.lazy(() =>
   import('./pages/SearchPage/SearchPage').then((module) => ({ default: module.SearchPage })),
 );
 const Header = React.lazy(() => import('./components/Header/Header').then((module) => ({ default: module.Header })));
+const Authentication = React.lazy(() =>
+  import('./components/Authentication/Authentication').then((module) => ({ default: module.Authentication })),
+);
 
 function App() {
   return (
@@ -35,8 +38,8 @@ function App() {
         {/* <ErrorBoundary fallback={<h1>Error</h1>}></ErrorBoundary> */}
         <Header />
         <Routes>
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/signup' element={<SignInPage />} />
+          <Route path='/signin' element={<SignUpPage />} />
           <Route
             path='/'
             element={

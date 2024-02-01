@@ -46,7 +46,7 @@ const HistoryPosts: React.FC<Ihistory> = ({ post }) => {
 export const History = () => {
   const historyList = useAppSelector((state) => state.history.historyQuery);
   console.log(historyList);
-  const content = historyList.map((post: string, index: number) => <HistoryPosts post={post} key={index} />);
+  const content = historyList.map((post: string, index: number) => <HistoryPosts post={post} key={post + index} />);
 
   return (
     <section className='history'>

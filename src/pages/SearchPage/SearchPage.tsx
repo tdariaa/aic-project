@@ -13,12 +13,12 @@ export const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParam = new URLSearchParams(location.search).get('query');
-  console.log(location, queryParam);
+  // console.log(location, queryParam);
 
   const dispatch = useAppDispatch()();
   const { data: items, isLoading, isSuccess } = useGetArtworkBySearchQuery(queryParam);
 
-  console.log(items);
+  // console.log(items);
 
   const handleClick = (title: string, id: string) => {
     // dispatch(addHistoryItem(title));

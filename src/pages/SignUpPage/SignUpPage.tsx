@@ -1,5 +1,6 @@
 import { SignUp } from '../../components/SignUp/SignUp';
+import { Authentication } from '../../components/Authentication/Authentication';
 
 export const SignUpPage = () => {
-  return <SignUp />;
+  return <Authentication pathname={'/signup'} />;
 };
