@@ -1,14 +1,9 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-
-// const OtherComponent = React.lazy(() => import('./OtherComponent'));
 import { Route, Routes } from 'react-router';
-// import { MainPage } from './pages/MainPage/MainPage';
-// import { SignInPage } from './pages/SignInPage/SignInPage';
-// import { SignUpPage } from './pages/SignUpPage/SignUpPage';
+import { Preloader } from './components/Preloader/Preloader';
 import './App.css';
 
-import { Preloader } from './components/Preloader/Preloader';
 const MainPage = React.lazy(() => import('./pages/MainPage/MainPage').then((module) => ({ default: module.MainPage })));
 const HistoryPage = React.lazy(() =>
   import('./pages/HistoryPage/HistoryPage').then((module) => ({ default: module.HistoryPage })),
@@ -27,19 +22,19 @@ const SearchPage = React.lazy(() =>
   import('./pages/SearchPage/SearchPage').then((module) => ({ default: module.SearchPage })),
 );
 const Header = React.lazy(() => import('./components/Header/Header').then((module) => ({ default: module.Header })));
-const Authentication = React.lazy(() =>
-  import('./components/Authentication/Authentication').then((module) => ({ default: module.Authentication })),
+const NoResult = React.lazy(() =>
+  import('./components/NoResult/NoResult').then((module) => ({ default: module.NoResult })),
 );
 
 function App() {
   return (
     <div className='page'>
       <Suspense fallback={<Preloader />}>
-        {/* <ErrorBoundary fallback={<h1>Error</h1>}></ErrorBoundary> */}
         <Header />
         <Routes>
-          <Route path='/signup' element={<SignInPage />} />
-          <Route path='/signin' element={<SignUpPage />} />
+          <Route path='*' element={<NoResult />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/signin' element={<SignInPage />} />
           <Route
             path='/'
             element={
@@ -80,13 +75,12 @@ function App() {
               </ErrorBoundary>
             }
           />
+          {/* <Route path='*' element={} /> */}
 
           {/* <Route path='/element' element={} /> */}
 
           {/* <Route path='/:id' element={ElementPage} id={id} /> */}
-          {/* <Route path='*' element={} /> */}
         </Routes>
-        {/* </ErrorBoundary> */}
       </Suspense>
     </div>
   );

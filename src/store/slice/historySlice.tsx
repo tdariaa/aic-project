@@ -1,13 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { HistoryState } from '../../types/types';
+import type { searchQuery } from '../../types/types';
 
-type searchQuery = string;
-
-interface IHistoryState {
-  historyQuery: searchQuery[];
-}
-
-const initialHistoryState: IHistoryState = {
+const initialHistoryState: HistoryState = {
   historyQuery: [],
 };
 

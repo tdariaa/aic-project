@@ -1,21 +1,16 @@
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-import { SubmitHandler, useForm } from 'react-hook-form';
-export interface IAuthProps {
-  children: React.ReactNode;
-  authText: string;
-  authLinkName: string;
-  authLink: string;
-  buttonText: string;
-  onSubmit: any;
+export type searchQuery = string;
+
+export interface HistoryState {
+  historyQuery: searchQuery[];
 }
 
-export interface IFormInputs {
-  username: string;
+export interface FormInputs {
+  username?: string;
   email: string;
   password: string;
 }
 
-export interface ICard {
+export interface CardProps {
   id: string;
   imgId: string;
   title: string;
@@ -23,7 +18,7 @@ export interface ICard {
   artworkTypeTitle: string;
 }
 
-export interface IPictureItem {
+export interface PictureItem {
   id: string;
   image_id: string;
   artist_title: string;
@@ -33,15 +28,28 @@ export interface IPictureItem {
   provenance_text: string;
 }
 
-export interface IArtworksState {
-  data: IPictureItem[];
-}
-
-export interface IPictureItemById extends IPictureItem {
+export interface PictureItemById extends PictureItem {
   description: string;
   artist_display: string;
+  date_start: string;
+  date_end: string;
+  place_of_origin: string;
+  credit_line: string;
+  medium_display: string;
 }
 
-export interface IArtworksStateByID {
-  data: IPictureItemById;
+export interface ArtworksState {
+  data: PictureItem[];
+}
+
+export interface ArtworksStateByID {
+  data: PictureItemById;
+}
+
+export interface AuthenticationProps {
+  pathname: '/signin' | '/signup';
+}
+
+export interface HistoryProps {
+  post: string;
 }

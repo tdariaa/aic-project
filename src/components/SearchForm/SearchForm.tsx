@@ -1,32 +1,30 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { useGetArtworkByIdQuery, useGetArtworkBySearchQuery } from '../../store/api/api';
+import { useLocation, useNavigate } from 'react-router';
+import { useAppDispatch } from '../../store/hook';
+import { useGetArtworkBySearchQuery } from '../../store/api/api';
 import { addHistoryItem } from '../../store/slice/historySlice';
 
 import './SearchForm.css';
 import { useDebounce } from '../../hooks/useDebounce';
 
 export const SearchForm = () => {
-  const dispatch = useAppDispatch()();
-  const [value, setValue] = React.useState('');
+  const location = useLocation();
+  const queryParam = new URLSearchParams(location.search).get('query');
+  const dispatch = useAppDispatch();
+  const [value, setValue] = React.useState(queryParam || '');
   const debouncedSearchTerm = useDebounce(value, 500);
   const [isOpen, setIsOpen] = React.useState(false);
   const { data: items } = useGetArtworkBySearchQuery(debouncedSearchTerm, { skip: value.trim().length < 0 });
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    setValue('');
-  }, []);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(addHistoryItem(value));
     setIsOpen(false);
     navigate(`/search/?query=${value}`);
-    setValue('');
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target) {
       setValue(() => e.target.value);
@@ -35,7 +33,6 @@ export const SearchForm = () => {
   };
 
   const handleClick = (title: string, id: string) => {
-    // dispatch(addHistoryItem(title));
     navigate(`/element/${id}`);
     setIsOpen(false);
   };

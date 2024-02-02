@@ -1,8 +1,8 @@
 import './Card.css';
 import { useNavigate } from 'react-router';
-import { ICard } from '../../types/types';
+import { CardProps } from '../../types/types';
 
-export const Card: React.FC<ICard> = (card) => {
+export const Card = (card: CardProps) => {
   const navigate = useNavigate();
 
   return (

@@ -38,6 +38,14 @@
 }
 
 .auth__title {
+  font-size: 20px;
+  margin: 0;
+  padding: 10px 0 10px 0;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.auth__subtitle {
   font-size: 14px;
   margin: 0;
   padding-bottom: 3px;

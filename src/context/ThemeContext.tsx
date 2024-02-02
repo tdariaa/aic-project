@@ -15,7 +15,7 @@ export const ThemeContext = React.createContext<ThemeContextInterface>({
   toggleTheme: () => {},
 });
 
-export const ThemeContextProvider: React.FC<ThemeContextProps> = ({ children }) => {
+export const ThemeContextProvider = ({ children }: ThemeContextProps) => {
   const [theme, setTheme] = React.useState(true);
   const toggleTheme = React.useCallback(() => {
     setTheme(!theme);

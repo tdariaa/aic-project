@@ -2,6 +2,7 @@ import './CardSection.css';
 import { useGetArtworksQuery } from '../../store/api/api';
 import { Card } from '../Card/Card';
 import '../Card/Card.css';
+import { transformPictureItem } from '../../utils/transformTypes';
 
 export const CardSection = () => {
   const { data: items, isLoading, isSuccess, isError, error } = useGetArtworksQuery('');
@@ -10,15 +11,16 @@ export const CardSection = () => {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (isSuccess) {
-    const data = items.cards.filter((card) => card.image_id != null);
+    const frontItem = items.cards.map((card) => transformPictureItem(card));
+    const data = frontItem.filter((card) => card.imageId != null);
     content = data.map((card) => (
       <li className='card__item' key={card.id}>
         <Card
           id={card.id}
-          imgId={card.image_id}
+          imgId={card.imageId}
           title={card.title}
-          artistTitle={card.artist_title}
-          artworkTypeTitle={card.artwork_type_title}
+          artistTitle={card.artistTitle}
+          artworkTypeTitle={card.artworkTypeTitle}
         />
       </li>
     ));

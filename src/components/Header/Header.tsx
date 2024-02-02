@@ -18,17 +18,7 @@ export const Header = () => {
           <ul className='header__links'>
             <li className='header__link'>
               <Link to='/history' className='header__link-a'>
-                history
-              </Link>
-            </li>
-            <li className='header__link'>
-              <Link to='/favorite' className='header__link-a'>
-                favorite
-              </Link>
-            </li>
-            <li className='header__link'>
-              <Link to='/' className='header__link-a'>
-                Главная
+                История
               </Link>
             </li>
             <li className='header__link'>
@@ -39,6 +29,11 @@ export const Header = () => {
             <li className='header__link'>
               <Link to='/signin' className='header__link-a'>
                 Войти
+              </Link>
+            </li>
+            <li className='header__link'>
+              <Link to='/signup' className='header__link-a'>
+                Регистрация
               </Link>
             </li>
           </ul>

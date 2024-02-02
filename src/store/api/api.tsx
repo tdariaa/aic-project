@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IArtworksStateByID, IArtworksState } from '../../types/types';
+import { ArtworksStateByID, ArtworksState } from '../../types/types';
 
 export const api = createApi({
   reducerPath: 'api',
@@ -7,19 +7,19 @@ export const api = createApi({
   endpoints: (builder) => ({
     getArtworks: builder.query({
       query: () => '/artworks?page=1&limit=13',
-      transformResponse: (response: IArtworksState) => ({
+      transformResponse: (response: ArtworksState) => ({
         cards: response.data,
       }),
     }),
     getArtworkById: builder.query({
       query: (id) => `/artworks/${id}`,
-      transformResponse: (response: IArtworksStateByID) => ({
+      transformResponse: (response: ArtworksStateByID) => ({
         data: response.data,
       }),
     }),
     getArtworkBySearch: builder.query({
       query: (request) => `https://api.artic.edu/api/v1/artworks/search?q=${request}`,
-      transformResponse: (response: IArtworksState) => ({
+      transformResponse: (response: ArtworksState) => ({
         cards: response.data,
       }),
     }),

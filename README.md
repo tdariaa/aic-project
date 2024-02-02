@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+### **1 уровень (обязательный - необходимый минимум)**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [ ] Реализованы **Требования к функциональности.**
+- [ ] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используем **LocalStorage**. [redux-persist](https://www.npmjs.com/package/redux-persist) библиотеку использовать **нельзя** из-за того, что привнесется большая автоматизация процесса сохранения, и это будет неравносильно затратам по времени других людей, которые используют LocalStorage напрямую.
 
-## Available Scripts
+**React**
 
-In the project directory, you can run:
+- [ ] **Пишем функциональные компоненты c хуками** в приоритете над классовыми. (Классовый скорее всего у вас будет только один в котором будет реализация Error Boundaries. Это не значит, что можно забить на теорию классовых компонентов. Нет. Методы жизненного цикла - очень частый вопрос на выходном интервью. Прочую инфу по классовым компонентам тоже стоит пропустить через себя и усвоить)
+- [ ] Есть разделение на **умные и глупые компоненты** (https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0, перевод - https://habr.com/ru/post/266559/. Это пункт - лишь общая рекомендация. Обратите внимание на Update from 2019 по первой ссылке от Дэна. Поэтому не относитесь к этому пункту слишком серьезно. Он тут для того, чтобы вы знали, что существуют такие термины в комьюнити, и не растерялись на собесе, если в каком-то вопросе они прозвучат).
+- [x] Есть **рендеринг списков** (https://ru.reactjs.org/docs/lists-and-keys.html)
+- [x] Реализована хотя бы одна **форма** (https://ru.reactjs.org/docs/forms.html). Можно использовать UI kit библиотеку ([MUI](https://mui.com/), [AntDesign](https://ant.design/), [ChakraUI](https://chakra-ui.com/) и т.п.), спец. библиотеку построения форм ([Formik](https://formik.org/), [React Hook Form](https://react-hook-form.com/) и т.п.).
+- [x] Есть применение **Контекст API** (https://ru.reactjs.org/docs/context.html). Да, вроде бы у нас есть ридакс, зачем тогда нам контекст? Помните, что мы лишь трогаем и играемся со всякой апишкой реакта. Да и использование этих инструментов одновременно - это дискуссионный вопрос. Где-то это уместно, где-то не особо. Если не знаете, где применить в своем приложении, делайте _темную/светлую тему_. Достаточно цвет шапки или кнопку перекрашивать. Не нужно глобально делать темный/светлый дизайн всего приложения.
+- [x] Есть применение **предохранителя** (https://ru.reactjs.org/docs/error-boundaries.html). Можно и свой написать, можно и пакет [react-error-boundary](https://www.npmjs.com/package/react-error-boundary) заюзать. Главное, чтобы вы понимали что это и зачем.
+- [ ] Есть хотя бы один **кастомный хук** (https://ru.reactjs.org/docs/hooks-custom.html). Какой-нибудь useActions внутри которого bindActionCreators - не засчитаю. Хук должен быть чуть масштабнее. useDebounce - уже лучше, но вдруг вы его бездумно взяли из интернета. Так что лучше несмотря на useDebounce, был ещё какой-нибудь кастомный хук.
+- [ ] Хотя бы несколько компонентов используют **PropTypes** (https://ru.reactjs.org/docs/typechecking-with-proptypes.html). Если пишите на TS, всё равно добавьте на 2, 3 компонента PropTypes, чтобы закрыть этот пункт.
+- [x] Поиск не должен триггерить много запросов к серверу (**debounce**) (https://ru.reactjs.org/docs/faq-functions.html#how-can-i-prevent-a-function-from-being-called-too-quickly-or-too-many-times-in-a-row). Использовать useDebounce из интернета - ок.
+- [x] Есть применение **lazy + Suspense** (https://ru.reactjs.org/docs/code-splitting.html#route-based-code-splitting)
 
-### `npm start`
+**Redux**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] Используем **Modern Redux with Redux Toolkit** (https://redux.js.org/tutorials/fundamentals/part-8-modern-redux)
+- [ ] Используем **слайсы** (https://redux.js.org/tutorials/fundamentals/part-8-modern-redux#using-createslice)
+- [ ] Есть хотя бы одна **кастомная мидлвара** (**[store ⇒ next ⇒ action ⇒ {}](https://redux.js.org/understanding/history-and-design/middleware)** или **`[createListenerMiddleware](https://redux-toolkit.js.org/api/createListenerMiddleware)`** )
+- [x] Используется **RTK Query** (https://redux.js.org/tutorials/essentials/part-7-rtk-query-basics)
+- [x] Используется **Transforming Responses** (https://redux.js.org/tutorials/essentials/part-8-rtk-query-advanced#transforming-responses). Если у вас такая апишка, что особо “готовить” в данных нечего, то будет достаточно простой функции, которая залезет в свойство ответа от сервера. Что-то типа response ⇒ response.results, в зависимости как ваша апишка данные вам отдаёт. Это лишь пример. Главное в этом пункте знать, что есть такая вот штука - transformResponse.
