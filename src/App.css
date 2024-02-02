@@ -1,39 +1,56 @@
-.App {
-  text-align: center;
-}
+@import url(./vendor/normalize.css);
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@import url(./components/Header/Header.css);
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+.page {
+  /* background_light:
+    radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #fff4da 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #fff4da 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #fff4da 68% 70%, #0000 72%) 0 0 / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #fff4da 68% 70%, #0000 72%) 0 0 / calc(2 * 50px) calc(2 * 50px),
+    repeating-conic-gradient(#baae91 0 25%, #0000 0 50%) 0 0 / calc(2 * 50px) calc(2 * 50px),
+    radial-gradient(#0000 66%, #fff4da 68% 70%, #0000 72%) 0 calc(50px / 2) / 50px 50px #baae91; */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background:
+    radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #20222a 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #20222a 68% 70%, #0000 72%) 50px 50px / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #20222a 68% 70%, #0000 72%) 0 0 / calc(2 * 50px)
+      calc(2 * 50px),
+    radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #20222a 68% 70%, #0000 72%) 0 0 / calc(2 * 50px) calc(2 * 50px),
+    repeating-conic-gradient(#191b22 0 25%, #0000 0 50%) 0 0 / calc(2 * 50px) calc(2 * 50px),
+    radial-gradient(#0000 66%, #20222a 68% 70%, #0000 72%) 0 calc(50px / 2) / 50px 50px #191b22;
+  background-attachment: fixed;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  font-family: 'Comfortaa', 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 0;
+  color: #919191;
 }
 
-.App-link {
-  color: #61dafb;
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background: #20222a;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #919191;
+  border-radius: 20px;
+  border: 3px solid #20222a;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* .main {
+  display: grid;
+  margin: 0 auto 0;
+  width: 100%;
+  font-size: 16px;
+} */

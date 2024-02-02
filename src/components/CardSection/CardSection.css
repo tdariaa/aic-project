@@ -1,0 +1,6 @@
+.card-area {
+  width: 100%;
+  min-height: min-content;
+  padding: 50px;
+  box-sizing: border-box;
+}
