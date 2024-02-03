@@ -26,6 +26,15 @@ export const authenticationSlice = createSlice({
       state.password = action.payload.password;
       console.log(state.email);
     },
+    logInUser(state, action: PayloadAction<string>) {
+      console.log(action.payload);
+      const userLS = localStorage.getItem(action.payload);
+      if (userLS) {
+        state.username = JSON.parse(userLS).username;
+        state.email = JSON.parse(userLS).email;
+        state.password = JSON.parse(userLS).password;
+      }
+    },
     // getUser(state, action: PayloadAction<AuthState>) {
     //     state.username = action.payload.username;
     //     state.email = action.payload.email;
@@ -38,5 +47,5 @@ export const authenticationSlice = createSlice({
   },
 });
 
-export const { addUser } = authenticationSlice.actions;
+export const { addUser, logInUser } = authenticationSlice.actions;
 export default authenticationSlice.reducer;

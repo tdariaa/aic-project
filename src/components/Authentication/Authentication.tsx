@@ -4,14 +4,15 @@ import '../Authentication/Authentication.css';
 import { AuthenticationProps } from '../../types/types';
 import { validationErrorMessage } from '../../utils/validationErrorMessage';
 import { FormInputs } from '../../types/types';
-import { useAuthentication } from '../../hooks/useAuthentication';
+import { checkAuthentication } from '../../utils/checkAuthentication';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { addUser } from '../../store/slice/authenticationSlice';
+import { addUser, logInUser } from '../../store/slice/authenticationSlice';
 import { getFavoriteItem } from '../../store/slice/favotiteSlice';
+import { getHistoryItem } from '../../store/slice/historySlice';
 
 export const Authentication = ({ pathname }: AuthenticationProps) => {
   const navigate = useNavigate();
-  const [authCheck] = useAuthentication();
+  // const [authCheck] = checkAuthentication();
   // const userEmail = useAppSelector((state) => state.authentication.email);
   const dispatch = useAppDispatch();
   const location = pathname === '/signup';
@@ -38,7 +39,15 @@ export const Authentication = ({ pathname }: AuthenticationProps) => {
       // localStorage.setItem(data.email, JSON.stringify(data));
       return;
     }
-    // console.log('ne ok');
+    console.log('ne ok', data);
+    if (checkAuthentication(data)) {
+      dispatch(logInUser(data.email));
+      // dispatch(getHistoryItem(data.email));
+      navigate('/');
+      return;
+    }
+    navigate('/signup');
+
     // authCheck(data);
     // dispatch(getFavoriteItem(data));
   };

@@ -62,7 +62,9 @@ export const Item = () => {
           />
           <p className='item__description'>{frontItem.description}</p>
           <div className='item__buttons'>
-            <button className='item__button item__button_back'>Назад</button>
+            <button className='item__button item__button_back' onClick={() => navigate(-1)}>
+              Назад
+            </button>
             <button className='item__button item__button_fav' onClick={() => handleClick(frontItem, userEmail)}>
               В избранное
             </button>

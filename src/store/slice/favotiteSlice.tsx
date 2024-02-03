@@ -22,6 +22,11 @@ interface addFav {
   email: string;
 }
 
+interface updateFav {
+  item: PictureItemFront[];
+  email: string;
+}
+
 export const favoriteSlice = createSlice({
   name: 'favorite',
   initialState: initialFavoriteState,
@@ -48,11 +53,15 @@ export const favoriteSlice = createSlice({
         state.favoriteQuery = JSON.parse(LS);
       }
     },
+    updateFavoriteItems(state, action: PayloadAction<updateFav>) {
+      console.log(state.favoriteQuery, action.payload);
+      state.favoriteQuery = action.payload.item;
+    },
     // deleteFavoriteItem(state, action: PayloadAction<searchQuery>) {
     //   state.historyQuery = state.historyQuery.filter((item) => item !== action.payload);
     // },
   },
 });
 
-export const { addFavoriteItem, getFavoriteItem } = favoriteSlice.actions;
+export const { addFavoriteItem, getFavoriteItem, updateFavoriteItems } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

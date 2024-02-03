@@ -1,17 +1,19 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
-import { addFavoriteItem } from '../slice/favotiteSlice';
-import { addUser } from '../slice/authenticationSlice';
+import { addFavoriteItem, updateFavoriteItems } from '../slice/favotiteSlice';
+import { addHistoryItem, updateHistoryItem } from '../slice/historySlice';
+import { addUser, logInUser } from '../slice/authenticationSlice';
+import { useAppDispatch } from '../hook';
 
-interface AuthState {
-  username?: string;
-  email?: string;
-  password?: string;
-}
-const initialAuthState: AuthState = {
-  username: '',
-  email: '',
-  password: '',
-};
+// interface AuthState {
+//   username?: string;
+//   email?: string;
+//   password?: string;
+// }
+// const initialAuthState: AuthState = {
+//   username: '',
+//   email: '',
+//   password: '',
+// };
 
 export const LSMiddleware = createListenerMiddleware();
 LSMiddleware.startListening({
@@ -29,29 +31,55 @@ LSMiddleware.startListening({
         }),
       );
     }
-
-    console.log(action.payload);
   },
 });
+
+LSMiddleware.startListening({
+  actionCreator: logInUser,
+  effect: (action, listenerApi) => {
+    console.log('middleware', listenerApi);
+    const itemsLS = localStorage.getItem(action.payload);
+    let parseItemsLS;
+    if (itemsLS) {
+      parseItemsLS = JSON.parse(itemsLS);
+      listenerApi.dispatch(updateFavoriteItems({ item: parseItemsLS.favorite, email: parseItemsLS.email }));
+      listenerApi.dispatch(updateHistoryItem({ historyQuery: parseItemsLS.history, email: parseItemsLS.email }));
+    }
+    console.log(listenerApi);
+  },
+});
+
 LSMiddleware.startListening({
   actionCreator: addFavoriteItem,
   effect: (action) => {
-    console.log(action.payload);
     const itemsLS = localStorage.getItem(action.payload.email);
     if (itemsLS) {
       const parseItemsLS = JSON.parse(itemsLS);
       parseItemsLS.favorite.unshift(action.payload.item);
       localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
     }
-    // console.log('added: ', action.payload);
-    // const ls = localStorage.getItem('fgfgfg@mail.ru');
-    // let lsParse;
-    // if (ls) {
-    //   lsParse = JSON.parse(ls);
+  },
+});
+
+LSMiddleware.startListening({
+  actionCreator: addHistoryItem,
+  effect: (action) => {
+    console.log(action);
+    let itemsLS;
+    if (action.payload.email) {
+      itemsLS = localStorage.getItem(action.payload.email);
+      if (itemsLS) {
+        const parseItemsLS = JSON.parse(itemsLS);
+        parseItemsLS.history.unshift(action.payload.search);
+        localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
+      }
+    }
+
+    // if (itemsLS) {
+    //   const parseItemsLS = JSON.parse(itemsLS);
+    //   parseItemsLS.favorite.unshift(action.payload.item);
+    //   localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
     // }
-    // // lsParse.favorite = [];
-    // lsParse.favorite.concat(action.payload);
-    // console.log(lsParse);
   },
 });
 
