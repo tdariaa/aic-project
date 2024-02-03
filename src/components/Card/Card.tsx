@@ -1,17 +1,30 @@
 import './Card.css';
 import { useNavigate } from 'react-router';
-import { CardProps } from '../../types/types';
+import { PictureItemFront } from '../../utils/transformTypes';
+import { useAppDispatch } from '../../store/hook';
+import { addFavoriteItem } from '../../store/slice/favotiteSlice';
 
-export const Card = (card: CardProps) => {
+export const Card = (card: PictureItemFront) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleClick = (card: PictureItemFront) => {
+    dispatch(addFavoriteItem(card));
+  };
 
   return (
     <div className='card'>
-      <img src={`https://www.artic.edu/iiif/2/${card.imgId}/full/843,/0/default.jpg`} alt='' className='card__image' />
+      <img
+        src={`https://www.artic.edu/iiif/2/${card.imageId}/full/843,/0/default.jpg`}
+        alt=''
+        className='card__image'
+      />
       <h2 className='card__title'>{card.title}</h2>
       <p className='card__title'>{card.artistTitle}</p>
       <p className='card__title'>{card.artworkTypeTitle}</p>
-      <button className='card__button card__button_like'>В избранное</button>
+      <button className='card__button card__button_like' onClick={() => handleClick(card)}>
+        В избранное
+      </button>
       <button
         className='card__button card__button_info'
         onClick={() => {

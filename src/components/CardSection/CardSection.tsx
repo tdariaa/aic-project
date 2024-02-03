@@ -1,32 +1,27 @@
 import './CardSection.css';
-import { useGetArtworksQuery } from '../../store/api/api';
+// import { useGetArtworksQuery } from '../../store/api/api';
 import { Card } from '../Card/Card';
 import '../Card/Card.css';
-import { transformPictureItem } from '../../utils/transformTypes';
+import { PictureItemFront } from '../../utils/transformTypes';
 
-export const CardSection = () => {
-  const { data: items, isLoading, isSuccess, isError, error } = useGetArtworksQuery('');
-  let content;
+export interface CardSectionProps {
+  cards: PictureItemFront[];
+}
 
-  if (isLoading) {
-    content = <div>Loading...</div>;
-  } else if (isSuccess) {
-    const frontItem = items.cards.map((card) => transformPictureItem(card));
-    const data = frontItem.filter((card) => card.imageId != null);
-    content = data.map((card) => (
-      <li className='card__item' key={card.id}>
-        <Card
-          id={card.id}
-          imgId={card.imageId}
-          title={card.title}
-          artistTitle={card.artistTitle}
-          artworkTypeTitle={card.artworkTypeTitle}
-        />
-      </li>
-    ));
-  } else if (isError) {
-    content = <div>{error.toString()}</div>;
-  }
+export const CardSection = ({ cards }: CardSectionProps) => {
+  let content = cards.map((card) => (
+    <li className='card__item' key={card.id}>
+      <Card
+        id={card.id}
+        imageId={card.imageId}
+        title={card.title}
+        artistTitle={card.artistTitle}
+        artworkTypeTitle={card.artworkTypeTitle}
+        dateDisplay={card.dateDisplay}
+        provenanceText={card.provenanceText}
+      />
+    </li>
+  ));
 
   return (
     <section className='card-area'>

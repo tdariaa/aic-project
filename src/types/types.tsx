@@ -10,14 +10,6 @@ export interface FormInputs {
   password: string;
 }
 
-export interface CardProps {
-  id: string;
-  imgId: string;
-  title: string;
-  artistTitle: string;
-  artworkTypeTitle: string;
-}
-
 export interface PictureItem {
   id: string;
   image_id: string;

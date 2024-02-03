@@ -1,11 +1,17 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '../Authentication/Authentication.css';
 import { AuthenticationProps } from '../../types/types';
 import { validationErrorMessage } from '../../utils/validationErrorMessage';
 import { FormInputs } from '../../types/types';
+import { useAuthentication } from '../../hooks/useAuthentication';
+import { useAppDispatch } from '../../store/hook';
+import { addUser } from '../../store/slice/authenticationSlice';
 
 export const Authentication = ({ pathname }: AuthenticationProps) => {
+  const navigate = useNavigate();
+  const [authCheck] = useAuthentication();
+  const dispatch = useAppDispatch();
   const location = pathname === '/signup';
 
   const {
@@ -23,16 +29,18 @@ export const Authentication = ({ pathname }: AuthenticationProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     if (location) {
-      localStorage.setItem(data.email, JSON.stringify(data));
+      dispatch(addUser({ username: data.username, email: data.email, password: data.password }));
+      // localStorage.setItem(data.email, JSON.stringify(data));
       return;
     }
+    authCheck(data);
   };
 
   return (
     <section className='auth'>
       <div className='auth__container'>
         <form className='auth__form' onSubmit={handleSubmit(onSubmit)}>
-        <h1 className='auth__title'>{location ? 'Регистрация' : 'Вход'}</h1>
+          <h1 className='auth__title'>{location ? 'Регистрация' : 'Вход'}</h1>
           {location && (
             <>
               <h3 className='auth__subtitle'>Имя :</h3>

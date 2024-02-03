@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Route, Routes } from 'react-router';
 import { Preloader } from './components/Preloader/Preloader';
+import { ProtectedRouteComponent } from './components/ProtectedRouteComponent';
 import './App.css';
 
 const MainPage = React.lazy(() => import('./pages/MainPage/MainPage').then((module) => ({ default: module.MainPage })));
@@ -51,14 +52,24 @@ function App() {
               </ErrorBoundary>
             }
           />
-          <Route
+          {/* <Route
             path='/favorite'
             element={
               <ErrorBoundary fallback={<h1>Error</h1>}>
                 <FavoritePage />
               </ErrorBoundary>
             }
-          />
+          /> */}
+          <Route path='/favorite' element={<ProtectedRouteComponent />}>
+            <Route
+              path='/favorite'
+              element={
+                <ErrorBoundary fallback={<h1>Error</h1>}>
+                  <FavoritePage />
+                </ErrorBoundary>
+              }
+            />
+          </Route>
           <Route
             path='/search'
             element={
@@ -75,11 +86,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-          {/* <Route path='*' element={} /> */}
-
-          {/* <Route path='/element' element={} /> */}
-
-          {/* <Route path='/:id' element={ElementPage} id={id} /> */}
         </Routes>
       </Suspense>
     </div>
