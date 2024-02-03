@@ -24,6 +24,8 @@ LSMiddleware.startListening({
           username: action.payload.username,
           email: action.payload.email,
           password: action.payload.password,
+          favorite: [],
+          history: [],
         }),
       );
     }
@@ -34,6 +36,13 @@ LSMiddleware.startListening({
 LSMiddleware.startListening({
   actionCreator: addFavoriteItem,
   effect: (action) => {
+    console.log(action.payload);
+    const itemsLS = localStorage.getItem(action.payload.email);
+    if (itemsLS) {
+      const parseItemsLS = JSON.parse(itemsLS);
+      parseItemsLS.favorite.unshift(action.payload.item);
+      localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
+    }
     // console.log('added: ', action.payload);
     // const ls = localStorage.getItem('fgfgfg@mail.ru');
     // let lsParse;

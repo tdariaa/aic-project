@@ -5,12 +5,14 @@ import { AuthenticationProps } from '../../types/types';
 import { validationErrorMessage } from '../../utils/validationErrorMessage';
 import { FormInputs } from '../../types/types';
 import { useAuthentication } from '../../hooks/useAuthentication';
-import { useAppDispatch } from '../../store/hook';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { addUser } from '../../store/slice/authenticationSlice';
+import { getFavoriteItem } from '../../store/slice/favotiteSlice';
 
 export const Authentication = ({ pathname }: AuthenticationProps) => {
   const navigate = useNavigate();
   const [authCheck] = useAuthentication();
+  // const userEmail = useAppSelector((state) => state.authentication.email);
   const dispatch = useAppDispatch();
   const location = pathname === '/signup';
 
@@ -28,12 +30,17 @@ export const Authentication = ({ pathname }: AuthenticationProps) => {
   });
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    console.log('inSubmit');
     if (location) {
+      console.log('ok');
       dispatch(addUser({ username: data.username, email: data.email, password: data.password }));
+      navigate('/');
       // localStorage.setItem(data.email, JSON.stringify(data));
       return;
     }
-    authCheck(data);
+    // console.log('ne ok');
+    // authCheck(data);
+    // dispatch(getFavoriteItem(data));
   };
 
   return (
