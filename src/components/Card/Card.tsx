@@ -8,11 +8,9 @@ export const Card = (card: PictureItemFront) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userEmail = useAppSelector((state) => state.authentication.email);
-  console.log(userEmail);
+  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  const isFav = favoriteList.some((item: PictureItemFront) => item.id === card.id);
 
-  // const handleClick = (card: PictureItemFront) => {
-  //   // dispatch(addFavoriteItem(card));
-  // };
   const handleClick = (card: PictureItemFront, email?: string) => {
     if (email) {
       dispatch(addFavoriteItem({ item: card, email: email }));
@@ -32,7 +30,7 @@ export const Card = (card: PictureItemFront) => {
       <p className='card__title'>{card.artistTitle}</p>
       <p className='card__title'>{card.artworkTypeTitle}</p>
       <button className='card__button card__button_like' onClick={() => handleClick(card, userEmail)}>
-        В избранное
+        {isFav ? 'Удалить' : 'В избранное'}
       </button>
       <button
         className='card__button card__button_info'

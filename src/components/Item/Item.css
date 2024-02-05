@@ -85,3 +85,16 @@
 .item__button:last-of-type {
   margin-left: 0;
 }
+
+.item__error-container {
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item__title_error {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 42px;
+}

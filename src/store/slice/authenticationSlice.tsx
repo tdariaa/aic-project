@@ -35,17 +35,13 @@ export const authenticationSlice = createSlice({
         state.password = JSON.parse(userLS).password;
       }
     },
-    // getUser(state, action: PayloadAction<AuthState>) {
-    //     state.username = action.payload.username;
-    //     state.email = action.payload.email;
-    //     state.password = action.payload.password;
-    //     console.log(state.email);
-    //   },
-    // deleteFavoriteItem(state, action: PayloadAction<searchQuery>) {
-    //   state.historyQuery = state.historyQuery.filter((item) => item !== action.payload);
-    // },
+    logOut(state) {
+      state.username = '';
+      state.email = '';
+      state.password = '';
+    },
   },
 });
 
-export const { addUser, logInUser } = authenticationSlice.actions;
+export const { addUser, logInUser, logOut } = authenticationSlice.actions;
 export default authenticationSlice.reducer;

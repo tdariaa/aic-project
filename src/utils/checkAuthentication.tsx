@@ -6,8 +6,6 @@ interface AuthProps {
 }
 
 export const checkAuthentication = (data: AuthProps) => {
-  // const navigate = useNavigate();
-  // const authCheck = (data: AuthProps) => {
   let isAuth;
   let pass;
   const user = localStorage.getItem(data.email);
@@ -17,7 +15,4 @@ export const checkAuthentication = (data: AuthProps) => {
     return isAuth;
   }
   return false;
-
-  // };
-  // return [authCheck];
 };

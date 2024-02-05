@@ -34,18 +34,9 @@ export const favoriteSlice = createSlice({
     addFavoriteItem(state, action: PayloadAction<addFav>) {
       console.log(action.payload.item, action.payload.email);
       const isItemAlreadyAdded = state.favoriteQuery.some((item) => item.id === action.payload.item.id);
-      //   const itemsLS = localStorage.getItem(action.payload.email);
-
-      //   if (!isItemAlreadyAdded && itemsLS) {
-      if (!isItemAlreadyAdded) {
-        state.favoriteQuery.unshift(action.payload.item);
-
-        // const parseItemsLS = JSON.parse(itemsLS);
-        // console.log('1', parseItemsLS);
-        // parseItemsLS.favorite.unshift(action.payload.item);
-        // localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
-        // console.log('2', parseItemsLS);
-      }
+      isItemAlreadyAdded
+        ? (state.favoriteQuery = state.favoriteQuery.filter((item) => item.id !== action.payload.item.id))
+        : state.favoriteQuery.unshift(action.payload.item);
     },
     getFavoriteItem(state, action: PayloadAction<GetFavoriteProps>) {
       let LS = localStorage.getItem(action.payload.email);

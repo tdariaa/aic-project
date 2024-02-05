@@ -2,8 +2,9 @@ import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 import { addFavoriteItem, updateFavoriteItems } from '../slice/favotiteSlice';
 import { addHistoryItem, updateHistoryItem } from '../slice/historySlice';
 import { addUser, logInUser } from '../slice/authenticationSlice';
-import { useAppDispatch } from '../hook';
 
+import { useAppDispatch } from '../hook';
+import { PictureItemFront } from '../../utils/transformTypes';
 // interface AuthState {
 //   username?: string;
 //   email?: string;
@@ -30,6 +31,7 @@ LSMiddleware.startListening({
           history: [],
         }),
       );
+      localStorage.setItem('online', action.payload.email);
     }
   },
 });
@@ -37,15 +39,14 @@ LSMiddleware.startListening({
 LSMiddleware.startListening({
   actionCreator: logInUser,
   effect: (action, listenerApi) => {
-    console.log('middleware', listenerApi);
     const itemsLS = localStorage.getItem(action.payload);
     let parseItemsLS;
     if (itemsLS) {
       parseItemsLS = JSON.parse(itemsLS);
       listenerApi.dispatch(updateFavoriteItems({ item: parseItemsLS.favorite, email: parseItemsLS.email }));
       listenerApi.dispatch(updateHistoryItem({ historyQuery: parseItemsLS.history, email: parseItemsLS.email }));
+      localStorage.setItem('online', parseItemsLS.email);
     }
-    console.log(listenerApi);
   },
 });
 
@@ -55,7 +56,14 @@ LSMiddleware.startListening({
     const itemsLS = localStorage.getItem(action.payload.email);
     if (itemsLS) {
       const parseItemsLS = JSON.parse(itemsLS);
-      parseItemsLS.favorite.unshift(action.payload.item);
+      const isItemAlreadyAdded = parseItemsLS.favorite.some(
+        (item: PictureItemFront) => item.id === action.payload.item.id,
+      );
+      isItemAlreadyAdded
+        ? (parseItemsLS.favorite = parseItemsLS.favorite.filter(
+            (item: PictureItemFront) => item.id !== action.payload.item.id,
+          ))
+        : parseItemsLS.favorite.unshift(action.payload.item);
       localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
     }
   },

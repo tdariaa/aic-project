@@ -76,7 +76,12 @@ export const Item = () => {
   return (
     <section className='item'>
       {isLoading && <div className='item__title'>Loading...</div>}
-      {isError && <div className='item__title'>Error</div>}
+      {isError && (
+        <div className='item__error-container'>
+          <h1 className='item__title item__title_error'>Error</h1>
+          <button className='item__button item__button_error'>Назад</button>
+        </div>
+      )}
       {isSuccess && content}
     </section>
   );

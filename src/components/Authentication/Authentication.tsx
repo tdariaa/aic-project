@@ -36,20 +36,15 @@ export const Authentication = ({ pathname }: AuthenticationProps) => {
       console.log('ok');
       dispatch(addUser({ username: data.username, email: data.email, password: data.password }));
       navigate('/');
-      // localStorage.setItem(data.email, JSON.stringify(data));
       return;
     }
     console.log('ne ok', data);
     if (checkAuthentication(data)) {
       dispatch(logInUser(data.email));
-      // dispatch(getHistoryItem(data.email));
       navigate('/');
       return;
     }
     navigate('/signup');
-
-    // authCheck(data);
-    // dispatch(getFavoriteItem(data));
   };
 
   return (
