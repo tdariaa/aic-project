@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useAppDispatch } from '../../store/hook';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { useGetArtworkBySearchQuery } from '../../store/api/api';
 import { addHistoryItem } from '../../store/slice/historySlice';
 
@@ -11,6 +11,7 @@ export const SearchForm = () => {
   const location = useLocation();
   const queryParam = new URLSearchParams(location.search).get('query');
   const dispatch = useAppDispatch();
+  const userEmail = useAppSelector((state) => state.authentication.email);
   const [value, setValue] = React.useState(queryParam || '');
   const debouncedSearchTerm = useDebounce(value, 500);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -20,7 +21,7 @@ export const SearchForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addHistoryItem(value));
+    dispatch(addHistoryItem({ search: value, email: userEmail }));
     setIsOpen(false);
     navigate(`/search/?query=${value}`);
   };

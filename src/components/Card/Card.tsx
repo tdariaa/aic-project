@@ -1,17 +1,37 @@
 import './Card.css';
 import { useNavigate } from 'react-router';
-import { CardProps } from '../../types/types';
+import { PictureItemFront } from '../../utils/transformTypes';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { addFavoriteItem } from '../../store/slice/favotiteSlice';
 
-export const Card = (card: CardProps) => {
+export const Card = (card: PictureItemFront) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const userEmail = useAppSelector((state) => state.authentication.email);
+  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  const isFav = favoriteList.some((item: PictureItemFront) => item.id === card.id);
+
+  const handleClick = (card: PictureItemFront, email?: string) => {
+    if (email) {
+      dispatch(addFavoriteItem({ item: card, email: email }));
+      return;
+    }
+    navigate('/signin');
+  };
 
   return (
     <div className='card'>
-      <img src={`https://www.artic.edu/iiif/2/${card.imgId}/full/843,/0/default.jpg`} alt='' className='card__image' />
+      <img
+        src={`https://www.artic.edu/iiif/2/${card.imageId}/full/843,/0/default.jpg`}
+        alt=''
+        className='card__image'
+      />
       <h2 className='card__title'>{card.title}</h2>
       <p className='card__title'>{card.artistTitle}</p>
       <p className='card__title'>{card.artworkTypeTitle}</p>
-      <button className='card__button card__button_like'>В избранное</button>
+      <button className='card__button card__button_like' onClick={() => handleClick(card, userEmail)}>
+        {isFav ? 'Удалить' : 'В избранное'}
+      </button>
       <button
         className='card__button card__button_info'
         onClick={() => {

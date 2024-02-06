@@ -1,9 +1,22 @@
+import { useAppSelector } from '../../store/hook';
+import { CardSection } from '../../components/CardSection/CardSection';
 import './FavoritePage.css';
 
+export interface PictureItemFront {
+  id: string;
+  imageId: string;
+  artistTitle: string;
+  artworkTypeTitle: string;
+  dateDisplay: string;
+  title: string;
+  provenanceText: string;
+}
+
 export const FavoritePage = () => {
+  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
   return (
     <main className='main'>
-      <h1>Favorite Page</h1>
+      <CardSection cards={favoriteList} />
     </main>
   );
 };
