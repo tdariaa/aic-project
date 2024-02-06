@@ -4,8 +4,6 @@ import { Route, Routes } from 'react-router';
 import { Preloader } from './components/Preloader/Preloader';
 import { ProtectedRouteComponent } from './components/ProtectedRouteComponent';
 import './App.css';
-import { useAppDispatch } from './store/hook';
-import { logInUser } from './store/slice/authenticationSlice';
 import { useAuthCheck } from './hooks/useAuthCheck';
 
 const MainPage = React.lazy(() => import('./pages/MainPage/MainPage').then((module) => ({ default: module.MainPage })));
@@ -32,16 +30,6 @@ const NoResult = React.lazy(() =>
 
 function App() {
   useAuthCheck();
-  // const [isAuth, setIsAuth] = React.useState(false);
-  // const dispatch = useAppDispatch();
-
-  // React.useEffect(() => {
-  //   const email = localStorage.getItem('online');
-  //   if (email) {
-  //     setIsAuth(!!email);
-  //     dispatch(logInUser(email));
-  //   }
-  // }, []);
 
   return (
     <div className='page'>
@@ -79,7 +67,6 @@ function App() {
               }
             />
           </Route>
-          {/* <Route path='/search' element={<ProtectedRouteComponent />}> */}
           <Route
             path='/search'
             element={
@@ -88,7 +75,6 @@ function App() {
               </ErrorBoundary>
             }
           />
-          {/* </Route> */}
           <Route
             path='/element/:id'
             element={

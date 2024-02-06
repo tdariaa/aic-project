@@ -1,19 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Authentication/Authentication.css';
 import { AuthenticationProps } from '../../types/types';
 import { validationErrorMessage } from '../../utils/validationErrorMessage';
 import { FormInputs } from '../../types/types';
 import { checkAuthentication } from '../../utils/checkAuthentication';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { useAppDispatch } from '../../store/hook';
 import { addUser, logInUser } from '../../store/slice/authenticationSlice';
-import { getFavoriteItem } from '../../store/slice/favotiteSlice';
-import { getHistoryItem } from '../../store/slice/historySlice';
 
 export const Authentication = ({ pathname }: AuthenticationProps) => {
   const navigate = useNavigate();
-  // const [authCheck] = checkAuthentication();
-  // const userEmail = useAppSelector((state) => state.authentication.email);
   const dispatch = useAppDispatch();
   const location = pathname === '/signup';
 
@@ -31,14 +27,11 @@ export const Authentication = ({ pathname }: AuthenticationProps) => {
   });
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    console.log('inSubmit');
     if (location) {
-      console.log('ok');
       dispatch(addUser({ username: data.username, email: data.email, password: data.password }));
       navigate('/');
       return;
     }
-    console.log('ne ok', data);
     if (checkAuthentication(data)) {
       dispatch(logInUser(data.email));
       navigate('/');

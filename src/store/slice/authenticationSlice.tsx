@@ -1,7 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { HistoryState } from '../../types/types';
-// import type { searchQuery } from '../../types/types';
-// import { PictureItemFront } from '../../utils/transformTypes';
 
 export interface AuthState {
   username?: string;
@@ -20,14 +17,11 @@ export const authenticationSlice = createSlice({
   initialState: initialAuthState,
   reducers: {
     addUser(state, action: PayloadAction<AuthState>) {
-      console.log(action.payload);
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      console.log(state.email);
     },
     logInUser(state, action: PayloadAction<string>) {
-      console.log(action.payload);
       const userLS = localStorage.getItem(action.payload);
       if (userLS) {
         state.username = JSON.parse(userLS).username;

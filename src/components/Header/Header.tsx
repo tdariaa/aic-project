@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext';
-import { logInUser, logOut } from '../../store/slice/authenticationSlice';
+import { logOut } from '../../store/slice/authenticationSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 
 export const Header = () => {
@@ -11,12 +11,11 @@ export const Header = () => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    setIsAuth(!!localStorage.getItem('online'));
+    setIsAuth(!!userEmail);
   }, [userEmail]);
 
   const handleClick = () => {
     dispatch(logOut());
-    localStorage.removeItem('online');
     setIsAuth(!isAuth);
   };
 

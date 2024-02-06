@@ -15,7 +15,6 @@ export interface PictureItemFront {
 
 export const FavoritePage = () => {
   const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
-  console.log(favoriteList);
   return (
     <main className='main'>
       <CardSection cards={favoriteList} />

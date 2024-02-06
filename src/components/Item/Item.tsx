@@ -5,16 +5,6 @@ import './Item.css';
 import { addFavoriteItem } from '../../store/slice/favotiteSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 
-// export interface PictureItemFront {
-//   id: string;
-//   imageId: string;
-//   artistTitle: string;
-//   artworkTypeTitle: string;
-//   dateDisplay: string;
-//   title: string;
-//   provenanceText: string;
-// }
-
 export interface PictureItemByIdFront extends PictureItemFront {
   description: string;
   artistDisplay: string;
@@ -31,10 +21,12 @@ export const Item = () => {
   const { data, isLoading, isSuccess, isError } = useGetArtworkByIdQuery(param.id);
   const dispatch = useAppDispatch();
   const userEmail = useAppSelector((state) => state.authentication.email);
+  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  let isFav;
   let content;
   let frontItem: PictureItemByIdFront;
 
-  const handleClick = (card: PictureItemByIdFront, email?: string) => {
+  const handleClick = (card: PictureItemFront, email?: string) => {
     if (email) {
       dispatch(addFavoriteItem({ item: card, email: email }));
       return;
@@ -44,6 +36,7 @@ export const Item = () => {
 
   if (isSuccess) {
     frontItem = transformPictureItemById(data.data);
+    isFav = favoriteList.some((item: PictureItemFront) => item.id === data.data.id);
     content = (
       <>
         <div className='item__about'>
@@ -66,7 +59,7 @@ export const Item = () => {
               Назад
             </button>
             <button className='item__button item__button_fav' onClick={() => handleClick(frontItem, userEmail)}>
-              В избранное
+              {isFav ? 'Удалить' : 'В избранное'}
             </button>
           </div>
         </div>

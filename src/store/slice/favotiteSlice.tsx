@@ -32,7 +32,6 @@ export const favoriteSlice = createSlice({
   initialState: initialFavoriteState,
   reducers: {
     addFavoriteItem(state, action: PayloadAction<addFav>) {
-      console.log(action.payload.item, action.payload.email);
       const isItemAlreadyAdded = state.favoriteQuery.some((item) => item.id === action.payload.item.id);
       isItemAlreadyAdded
         ? (state.favoriteQuery = state.favoriteQuery.filter((item) => item.id !== action.payload.item.id))
@@ -45,12 +44,8 @@ export const favoriteSlice = createSlice({
       }
     },
     updateFavoriteItems(state, action: PayloadAction<updateFav>) {
-      console.log(state.favoriteQuery, action.payload);
       state.favoriteQuery = action.payload.item;
     },
-    // deleteFavoriteItem(state, action: PayloadAction<searchQuery>) {
-    //   state.historyQuery = state.historyQuery.filter((item) => item !== action.payload);
-    // },
   },
 });
 

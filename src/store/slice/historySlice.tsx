@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { HistoryState } from '../../types/types';
-// import type { searchQuery } from '../../types/types';
 
 export type searchQuery = string;
 
@@ -29,14 +27,12 @@ export const historySlice = createSlice({
   initialState: initialHistoryState,
   reducers: {
     addHistoryItem(state, action: PayloadAction<addHistory>) {
-      console.log(action.payload);
       state.historyQuery.unshift(action.payload.search);
     },
-    deleteHistoryItem(state, action: PayloadAction<searchQuery>) {
-      state.historyQuery = state.historyQuery.filter((item) => item !== action.payload);
+    deleteHistoryItem(state, action: PayloadAction<addHistory>) {
+      state.historyQuery = state.historyQuery.filter((item) => item !== action.payload.search);
     },
     updateHistoryItem(state, action: PayloadAction<updateSearchQuery>) {
-      console.log(action.payload);
       state.historyQuery = action.payload.historyQuery;
     },
     getHistoryItem(state, action: PayloadAction<string>) {
