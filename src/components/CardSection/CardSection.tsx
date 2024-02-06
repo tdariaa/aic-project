@@ -1,5 +1,4 @@
 import './CardSection.css';
-// import { useGetArtworksQuery } from '../../store/api/api';
 import { Card } from '../Card/Card';
 import '../Card/Card.css';
 import { PictureItemFront } from '../../utils/transformTypes';

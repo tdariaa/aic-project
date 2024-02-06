@@ -1,5 +1,4 @@
 import { useAppSelector } from '../../store/hook';
-// import { FavoriteSection } from '../../components/FavoriteSection/FavoriteSection';
 import { CardSection } from '../../components/CardSection/CardSection';
 import './FavoritePage.css';
 

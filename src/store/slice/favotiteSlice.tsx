@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { HistoryState } from '../../types/types';
-// import type { searchQuery } from '../../types/types';
 import { PictureItemFront } from '../../utils/transformTypes';
 
 export interface FavoriteState {

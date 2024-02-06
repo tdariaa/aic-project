@@ -19,8 +19,6 @@ LSMiddleware.startListening({
           history: [],
         }),
       );
-      // localStorage.setItem('online', action.payload.email);
-
       const itemsLS = localStorage.getItem(action.payload.email);
       let parseItemsLS: LSData;
       if (itemsLS) {
