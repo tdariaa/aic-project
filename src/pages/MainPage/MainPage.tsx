@@ -3,11 +3,11 @@ import { CardSection } from '../../components/CardSection/CardSection';
 
 import './MainPage.css';
 import { useGetArtworksQuery } from '../../store/api/api';
-import { PictureItemFront, transformPictureItem } from '../../utils/transformTypes';
+import { transformPictureItem } from '../../utils/transformTypes';
 
 export const MainPage = () => {
   const { data: items, isLoading, isSuccess, isError, error } = useGetArtworksQuery('');
-  let content;
+  let content: JSX.Element | undefined;
 
   if (isLoading) {
     content = <div className='loading'>Loading...</div>;

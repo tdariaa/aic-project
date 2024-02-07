@@ -1,3 +1,5 @@
+import { PictureItemFront } from '../utils/transformTypes';
+
 export type searchQuery = string;
 
 export interface HistoryState {
@@ -44,4 +46,12 @@ export interface AuthenticationProps {
 
 export interface HistoryProps {
   post: string;
+}
+
+export interface LSData {
+  email: string;
+  favorite: PictureItemFront[];
+  history: string[];
+  password: string;
+  username: string;
 }

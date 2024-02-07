@@ -2,7 +2,7 @@ import './Card.css';
 import { useNavigate } from 'react-router';
 import { PictureItemFront } from '../../utils/transformTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { addFavoriteItem } from '../../store/slice/favotiteSlice';
+import { toggleFavoriteItem } from '../../store/slice/favotiteSlice';
 
 export const Card = (card: PictureItemFront) => {
   const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ export const Card = (card: PictureItemFront) => {
 
   const handleClick = (card: PictureItemFront, email?: string) => {
     if (email) {
-      dispatch(addFavoriteItem({ item: card, email: email }));
+      dispatch(toggleFavoriteItem({ item: card, email: email }));
       return;
     }
     navigate('/signin');

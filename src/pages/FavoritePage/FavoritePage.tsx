@@ -14,9 +14,10 @@ export interface PictureItemFront {
 
 export const FavoritePage = () => {
   const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  const isEmty: boolean = favoriteList.length === 0;
   return (
     <main className='main'>
-      <CardSection cards={favoriteList} />
+      {isEmty ? <h1 className='main__title'>Здесь пока ничего нет</h1> : <CardSection cards={favoriteList} />}
     </main>
   );
 };

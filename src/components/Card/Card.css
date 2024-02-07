@@ -46,10 +46,6 @@
 
 .card__button {
   background-color: transparent;
-  /* width: 20px; */
-  /* height: 20px; */
-  /* background-repeat: no-repeat;
-  background-size: 20px 20px; */
   border: #919191 1px solid;
   cursor: pointer;
   margin: 10px 10px 0 10px;
@@ -75,15 +71,3 @@
 .card__button:last-of-type {
   margin-left: 0;
 }
-
-/* .card__button_like {
-  background-image: url('../../images/add-square-svgrepo-com.svg');
-}
-
-.card__button_delete {
-  background-image: url('../../images/close-square-svgrepo-com.svg');
-}
-
-.card__button_info {
-  background-image: url('../../images/info-square-svgrepo-com.svg');
-} */

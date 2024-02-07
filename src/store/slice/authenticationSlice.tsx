@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getParseItemsLS } from '../../utils/localStorageUtils';
 
 export interface AuthState {
   username?: string;
@@ -22,11 +23,11 @@ export const authenticationSlice = createSlice({
       state.password = action.payload.password;
     },
     logInUser(state, action: PayloadAction<string>) {
-      const userLS = localStorage.getItem(action.payload);
-      if (userLS) {
-        state.username = JSON.parse(userLS).username;
-        state.email = JSON.parse(userLS).email;
-        state.password = JSON.parse(userLS).password;
+      const user = getParseItemsLS(action.payload);
+      if (user) {
+        state.username = user.username;
+        state.email = user.email;
+        state.password = user.password;
       }
     },
     logOut(state) {

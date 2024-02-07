@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useGetArtworkByIdQuery } from '../../store/api/api';
 import { PictureItemFront, transformPictureItemById } from '../../utils/transformTypes';
 import './Item.css';
-import { addFavoriteItem } from '../../store/slice/favotiteSlice';
+import { toggleFavoriteItem } from '../../store/slice/favotiteSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 
 export interface PictureItemByIdFront extends PictureItemFront {
@@ -22,13 +22,13 @@ export const Item = () => {
   const dispatch = useAppDispatch();
   const userEmail = useAppSelector((state) => state.authentication.email);
   const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
-  let isFav;
-  let content;
+  let isFav: boolean;
+  let content: JSX.Element | undefined;
   let frontItem: PictureItemByIdFront;
 
   const handleClick = (card: PictureItemFront, email?: string) => {
     if (email) {
-      dispatch(addFavoriteItem({ item: card, email: email }));
+      dispatch(toggleFavoriteItem({ item: card, email: email }));
       return;
     }
     navigate('/signin');

@@ -1,35 +1,9 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
-import { addFavoriteItem, updateFavoriteItems } from '../slice/favotiteSlice';
+import { toggleFavoriteItem, updateFavoriteItems } from '../slice/favotiteSlice';
 import { addHistoryItem, deleteHistoryItem, updateHistoryItem } from '../slice/historySlice';
 import { addUser, logInUser, logOut } from '../slice/authenticationSlice';
 import { PictureItemFront } from '../../utils/transformTypes';
-
-export const LSMiddleware = createListenerMiddleware();
-LSMiddleware.startListening({
-  actionCreator: addUser,
-  effect: (action, listenerApi) => {
-    if (action.payload.email) {
-      localStorage.setItem(
-        action.payload.email,
-        JSON.stringify({
-          username: action.payload.username,
-          email: action.payload.email,
-          password: action.payload.password,
-          favorite: [],
-          history: [],
-        }),
-      );
-      const itemsLS = localStorage.getItem(action.payload.email);
-      let parseItemsLS: LSData;
-      if (itemsLS) {
-        parseItemsLS = JSON.parse(itemsLS);
-        listenerApi.dispatch(updateFavoriteItems({ item: parseItemsLS.favorite, email: parseItemsLS.email }));
-        listenerApi.dispatch(updateHistoryItem({ historyQuery: parseItemsLS.history, email: parseItemsLS.email }));
-        localStorage.setItem('online', parseItemsLS.email);
-      }
-    }
-  },
-});
+import { addUserLS, getParseItemsLS, logOutLS, setParseItemsLS, updateUserInfoLS } from '../../utils/localStorageUtils';
 
 export interface LSData {
   email: string;
@@ -39,16 +13,28 @@ export interface LSData {
   username: string;
 }
 
+export const LSMiddleware = createListenerMiddleware();
+LSMiddleware.startListening({
+  actionCreator: addUser,
+  effect: (action, listenerApi) => {
+    if (action.payload.email) {
+      addUserLS(action.payload.username, action.payload.email, action.payload.password);
+      let parseItems = updateUserInfoLS(action.payload.email);
+      if (parseItems) {
+        listenerApi.dispatch(updateFavoriteItems({ item: parseItems.favorite, email: parseItems.email }));
+        listenerApi.dispatch(updateHistoryItem({ historyQuery: parseItems.history, email: parseItems.email }));
+      }
+    }
+  },
+});
+
 LSMiddleware.startListening({
   actionCreator: logInUser,
   effect: (action, listenerApi) => {
-    const itemsLS = localStorage.getItem(action.payload);
-    let parseItemsLS: LSData;
-    if (itemsLS) {
-      parseItemsLS = JSON.parse(itemsLS);
-      listenerApi.dispatch(updateFavoriteItems({ item: parseItemsLS.favorite, email: parseItemsLS.email }));
-      listenerApi.dispatch(updateHistoryItem({ historyQuery: parseItemsLS.history, email: parseItemsLS.email }));
-      localStorage.setItem('online', parseItemsLS.email);
+    let parseItems = updateUserInfoLS(action.payload);
+    if (parseItems) {
+      listenerApi.dispatch(updateFavoriteItems({ item: parseItems.favorite, email: parseItems.email }));
+      listenerApi.dispatch(updateHistoryItem({ historyQuery: parseItems.history, email: parseItems.email }));
     }
   },
 });
@@ -56,26 +42,24 @@ LSMiddleware.startListening({
 LSMiddleware.startListening({
   actionCreator: logOut,
   effect: () => {
-    localStorage.removeItem('online');
+    logOutLS();
   },
 });
 
 LSMiddleware.startListening({
-  actionCreator: addFavoriteItem,
+  actionCreator: toggleFavoriteItem,
   effect: (action) => {
-    const itemsLS = localStorage.getItem(action.payload.email);
-    let parseItemsLS: LSData;
-    if (itemsLS) {
-      parseItemsLS = JSON.parse(itemsLS);
-      const isItemAlreadyAdded = parseItemsLS.favorite.some(
+    let parseItems = getParseItemsLS(action.payload.email);
+    if (parseItems) {
+      const isItemAlreadyAdded = parseItems.favorite.some(
         (item: PictureItemFront) => item.id === action.payload.item.id,
       );
       isItemAlreadyAdded
-        ? (parseItemsLS.favorite = parseItemsLS.favorite.filter(
+        ? (parseItems.favorite = parseItems.favorite.filter(
             (item: PictureItemFront) => item.id !== action.payload.item.id,
           ))
-        : parseItemsLS.favorite.unshift(action.payload.item);
-      localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
+        : parseItems.favorite.unshift(action.payload.item);
+      setParseItemsLS(action.payload.email, parseItems);
     }
   },
 });
@@ -83,14 +67,11 @@ LSMiddleware.startListening({
 LSMiddleware.startListening({
   actionCreator: addHistoryItem,
   effect: (action) => {
-    let itemsLS: string | null;
-    let parseItemsLS: LSData;
     if (action.payload.email) {
-      itemsLS = localStorage.getItem(action.payload.email);
-      if (itemsLS) {
-        parseItemsLS = JSON.parse(itemsLS);
-        parseItemsLS.history.unshift(action.payload.search);
-        localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
+      let parseItems = getParseItemsLS(action.payload.email);
+      if (parseItems) {
+        parseItems.history.unshift(action.payload.search);
+        setParseItemsLS(action.payload.email, parseItems);
       }
     }
   },
@@ -99,13 +80,11 @@ LSMiddleware.startListening({
 LSMiddleware.startListening({
   actionCreator: deleteHistoryItem,
   effect: (action) => {
-    let itemsLS;
     if (action.payload.email) {
-      itemsLS = localStorage.getItem(action.payload.email);
-      if (itemsLS) {
-        const parseItemsLS = JSON.parse(itemsLS);
-        parseItemsLS.history = parseItemsLS.history.filter((item: string) => item !== action.payload.search);
-        localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
+      let parseItems = getParseItemsLS(action.payload.email);
+      if (parseItems) {
+        parseItems.history = parseItems.history.filter((item: string) => item !== action.payload.search);
+        setParseItemsLS(action.payload.email, parseItems);
       }
     }
   },

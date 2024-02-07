@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router';
+import PropTypes from 'prop-types';
 import { useAppSelector, useAppDispatch } from '../../store/hook';
 
 import { deleteHistoryItem } from '../../store/slice/historySlice';
 import { HistoryProps } from '../../types/types';
 import './History.css';
 
-const HistoryPosts = ({ post }: HistoryProps) => {
+export const History = ({ post }: HistoryProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userEmail = useAppSelector((state) => state.authentication.email);
@@ -28,13 +29,6 @@ const HistoryPosts = ({ post }: HistoryProps) => {
   );
 };
 
-export const History = () => {
-  const historyList = useAppSelector((state) => state.history.historyQuery);
-  const content = historyList.map((post: string, index: number) => <HistoryPosts post={post} key={post + index} />);
-
-  return (
-    <section className='history'>
-      <ul className='history__list'>{content}</ul>
-    </section>
-  );
+History.propTypes = {
+  post: PropTypes.string,
 };

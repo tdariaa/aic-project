@@ -43,7 +43,7 @@ export const Header = () => {
                   </Link>
                 </li>
                 <li className='header__link'>
-                  <Link onClick={() => handleClick()} to='/signin' className='header__link-a'>
+                  <Link onClick={() => handleClick()} to='/' className='header__link-a'>
                     Выйти
                   </Link>
                 </li>
