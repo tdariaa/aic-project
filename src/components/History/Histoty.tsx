@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import PropTypes from 'prop-types';
 import { useAppSelector, useAppDispatch } from '../../store/hook';
 
 import { deleteHistoryItem } from '../../store/slice/historySlice';
@@ -26,4 +27,8 @@ export const History = ({ post }: HistoryProps) => {
       </button>
     </li>
   );
+};
+
+History.propTypes = {
+  post: PropTypes.string,
 };

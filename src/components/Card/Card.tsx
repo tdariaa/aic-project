@@ -1,4 +1,5 @@
 import './Card.css';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import { PictureItemFront } from '../../utils/transformTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
@@ -42,4 +43,14 @@ export const Card = (card: PictureItemFront) => {
       </button>
     </div>
   );
+};
+
+Card.propTypes = {
+  id: PropTypes.string,
+  imageId: PropTypes.string,
+  artistTitle: PropTypes.string,
+  artworkTypeTitle: PropTypes.string,
+  dateDisplay: PropTypes.string,
+  title: PropTypes.string,
+  provenanceText: PropTypes.string,
 };
