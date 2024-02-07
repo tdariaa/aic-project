@@ -1,3 +1,4 @@
+import { getParseItemsLS } from './localStorageUtils';
 import { PictureItemFront } from './transformTypes';
 
 interface AuthProps {
@@ -16,11 +17,9 @@ export interface LSData {
 export const checkAuthentication = (data: AuthProps) => {
   let isAuth: boolean;
   let pass: string;
-  const user = localStorage.getItem(data.email);
-  let parseUser: LSData;
+  const user = getParseItemsLS(data.email);
   if (user) {
-    parseUser = JSON.parse(user);
-    pass = parseUser.password;
+    pass = user.password;
     isAuth = pass === data.password;
     return isAuth;
   }

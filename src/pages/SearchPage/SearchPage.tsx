@@ -35,7 +35,7 @@ export const SearchPage = () => {
         </ul>
       )}
       {!isLoading && isSuccess && items?.cards.length === 0 && (
-        <p className='search-page__title_no-result'>No result</p>
+        <p className='search-page__title_no-result'>Ничего не найдено</p>
       )}
     </main>
   );

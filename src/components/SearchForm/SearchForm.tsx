@@ -70,7 +70,7 @@ export const SearchForm = () => {
             ))}
           </ul>
         ) : (
-          <p className='search__title'>No result</p>
+          <p className='search__title'>Ничего не найдено</p>
         )}
       </div>
     </section>

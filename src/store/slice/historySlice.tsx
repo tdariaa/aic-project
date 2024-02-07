@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PictureItemFront } from '../../utils/transformTypes';
+import { getParseItemsLS } from '../../utils/localStorageUtils';
 
 export type searchQuery = string;
 
@@ -45,10 +46,9 @@ export const historySlice = createSlice({
       state.historyQuery = action.payload.historyQuery;
     },
     getHistoryItem(state, action: PayloadAction<string>) {
-      let dataLS = localStorage.getItem(action.payload);
-      if (dataLS) {
-        let parseDataLS: LSData = JSON.parse(dataLS);
-        state.historyQuery = parseDataLS.history;
+      let data = getParseItemsLS(action.payload);
+      if (data) {
+        state.historyQuery = data.history;
       }
     },
   },

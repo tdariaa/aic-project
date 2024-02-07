@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './CardSection.css';
 import { Card } from '../Card/Card';
 import '../Card/Card.css';
@@ -27,4 +28,14 @@ export const CardSection = ({ cards }: CardSectionProps) => {
       <ul className='card__list'>{content}</ul>
     </section>
   );
+};
+
+CardSection.propTypes = {
+  id: PropTypes.string,
+  imageId: PropTypes.string,
+  artistTitle: PropTypes.string,
+  artworkTypeTitle: PropTypes.string,
+  dateDisplay: PropTypes.string,
+  title: PropTypes.string,
+  provenanceText: PropTypes.string,
 };

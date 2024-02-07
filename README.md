@@ -16,7 +16,7 @@
 - [x] Есть применение **Контекст API**. Если не знаете, где применить в своем приложении, делайте _темную/светлую тему_. Достаточно цвет шапки или кнопку перекрашивать. ([ThemeContext](https://github.com/tdariaa/aic-project/blob/main/src/context/ThemeContext.tsx))
 - [x] Есть применение **предохранителя**. ([App](https://github.com/tdariaa/aic-project/blob/main/src/App.tsx))
 - [x] Есть хотя бы один **кастомный хук**. ([useDebounce](https://github.com/tdariaa/aic-project/blob/main/src/hooks/useDebounce.tsx), [useAuthCheck](https://github.com/tdariaa/aic-project/blob/main/src/hooks/useAuthCheck.tsx))
-- [x] Хотя бы несколько компонентов используют **PropTypes**. ([ThemeContext](https://github.com/tdariaa/aic-project/blob/main/src/context/ThemeContext.tsx), [Histoty](https://github.com/tdariaa/aic-project/blob/main/src/components/History/Histoty.tsx), [Card](https://github.com/tdariaa/aic-project/blob/main/src/components/Card/Card.tsx))
+- [x] Хотя бы несколько компонентов используют **PropTypes**. ([ThemeContext](https://github.com/tdariaa/aic-project/blob/main/src/context/ThemeContext.tsx), [Histoty](https://github.com/tdariaa/aic-project/blob/main/src/components/History/Histoty.tsx), [CardSection](https://github.com/tdariaa/aic-project/blob/main/src/components/CardSection/CardSection.tsx))
 - [x] Поиск не должен триггерить много запросов к серверу (**debounce**). ([useDebounce](https://github.com/tdariaa/aic-project/blob/main/src/hooks/useDebounce.tsx), [SearchForm](https://github.com/tdariaa/aic-project/blob/main/src/components/SearchForm/SearchForm.tsx))
 - [x] Есть применение **lazy + Suspense**. ([App](https://github.com/tdariaa/aic-project/blob/main/src/App.tsx))
 

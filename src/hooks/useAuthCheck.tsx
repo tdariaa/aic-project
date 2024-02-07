@@ -1,14 +1,15 @@
 import React from 'react';
 import { useAppDispatch } from '../store/hook';
 import { logInUser } from '../store/slice/authenticationSlice';
+import { getAuthLS } from '../utils/localStorageUtils';
 
 export const useAuthCheck = () => {
   const dispatch = useAppDispatch();
-  const LSemail = localStorage.getItem('online');
+  const emailLS = getAuthLS();
 
   React.useEffect(() => {
-    if (LSemail) {
-      dispatch(logInUser(LSemail));
+    if (emailLS) {
+      dispatch(logInUser(emailLS));
     }
   }, []);
 };
