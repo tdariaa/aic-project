@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PictureItemFront } from '../../utils/transformTypes';
 
 export type searchQuery = string;
 
@@ -22,6 +23,14 @@ interface updateSearchQuery {
   email: string;
 }
 
+export interface LSData {
+  email: string;
+  favorite: PictureItemFront[];
+  history: string[];
+  password: string;
+  username: string;
+}
+
 export const historySlice = createSlice({
   name: 'history',
   initialState: initialHistoryState,
@@ -36,9 +45,10 @@ export const historySlice = createSlice({
       state.historyQuery = action.payload.historyQuery;
     },
     getHistoryItem(state, action: PayloadAction<string>) {
-      let LS = localStorage.getItem(action.payload);
-      if (LS) {
-        state.historyQuery = JSON.parse(LS).history;
+      let dataLS = localStorage.getItem(action.payload);
+      if (dataLS) {
+        let parseDataLS: LSData = JSON.parse(dataLS);
+        state.historyQuery = parseDataLS.history;
       }
     },
   },

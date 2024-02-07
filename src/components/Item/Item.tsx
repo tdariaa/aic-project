@@ -22,8 +22,8 @@ export const Item = () => {
   const dispatch = useAppDispatch();
   const userEmail = useAppSelector((state) => state.authentication.email);
   const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
-  let isFav;
-  let content;
+  let isFav: boolean;
+  let content: JSX.Element | undefined;
   let frontItem: PictureItemByIdFront;
 
   const handleClick = (card: PictureItemFront, email?: string) => {

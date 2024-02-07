@@ -24,9 +24,10 @@ export const authenticationSlice = createSlice({
     logInUser(state, action: PayloadAction<string>) {
       const userLS = localStorage.getItem(action.payload);
       if (userLS) {
-        state.username = JSON.parse(userLS).username;
-        state.email = JSON.parse(userLS).email;
-        state.password = JSON.parse(userLS).password;
+        let parseUserLS: AuthState = JSON.parse(userLS);
+        state.username = parseUserLS.username;
+        state.email = parseUserLS.email;
+        state.password = parseUserLS.password;
       }
     },
     logOut(state) {

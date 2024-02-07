@@ -4,6 +4,14 @@ import { addHistoryItem, deleteHistoryItem, updateHistoryItem } from '../slice/h
 import { addUser, logInUser, logOut } from '../slice/authenticationSlice';
 import { PictureItemFront } from '../../utils/transformTypes';
 
+export interface LSData {
+  email: string;
+  favorite: PictureItemFront[];
+  history: string[];
+  password: string;
+  username: string;
+}
+
 export const LSMiddleware = createListenerMiddleware();
 LSMiddleware.startListening({
   actionCreator: addUser,
@@ -30,14 +38,6 @@ LSMiddleware.startListening({
     }
   },
 });
-
-export interface LSData {
-  email: string;
-  favorite: PictureItemFront[];
-  history: string[];
-  password: string;
-  username: string;
-}
 
 LSMiddleware.startListening({
   actionCreator: logInUser,
@@ -99,11 +99,12 @@ LSMiddleware.startListening({
 LSMiddleware.startListening({
   actionCreator: deleteHistoryItem,
   effect: (action) => {
-    let itemsLS;
+    let itemsLS: string | null;
+    let parseItemsLS: LSData;
     if (action.payload.email) {
       itemsLS = localStorage.getItem(action.payload.email);
       if (itemsLS) {
-        const parseItemsLS = JSON.parse(itemsLS);
+        parseItemsLS = JSON.parse(itemsLS);
         parseItemsLS.history = parseItemsLS.history.filter((item: string) => item !== action.payload.search);
         localStorage.setItem(action.payload.email, JSON.stringify(parseItemsLS));
       }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { SearchForm } from '../../components/SearchForm/SearchForm';

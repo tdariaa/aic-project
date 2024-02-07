@@ -1,4 +1,3 @@
-import React from 'react';
 import './NoResult.css';
 import { useNavigate } from 'react-router';
 

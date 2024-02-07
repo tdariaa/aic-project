@@ -1,16 +1,21 @@
 .history {
-  /* display: inline;
-  font-size: 14px;
-  display: flex; */
-
   font-size: 14px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  /* align-content: center; */
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.history__title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #91919157;
+  padding-top: 100px;
+  margin: 0;
 }
 
 .history__item {
