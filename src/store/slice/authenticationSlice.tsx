@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getParseItemsLS } from '../../utils/localStorageUtils';
+import { RootState } from '../index';
 
 export interface AuthState {
   username?: string;
@@ -37,6 +38,8 @@ export const authenticationSlice = createSlice({
     },
   },
 });
+
+export const getEmail = (state: RootState) => state.authentication.email;
 
 export const { addUser, logInUser, logOut } = authenticationSlice.actions;
 export default authenticationSlice.reducer;

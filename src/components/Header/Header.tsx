@@ -1,22 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext';
-import { logOut } from '../../store/slice/authenticationSlice';
+import { getEmail, logOut } from '../../store/slice/authenticationSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 
 export const Header = () => {
   const currentTheme = React.useContext(ThemeContext);
-  let userEmail = useAppSelector((state) => state.authentication.email);
-  const [isAuth, setIsAuth] = React.useState(!!userEmail);
+  let userEmail = useAppSelector(getEmail);
+  const isAuth = !!userEmail;
   const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    setIsAuth(!!userEmail);
-  }, [userEmail]);
 
   const handleClick = () => {
     dispatch(logOut());
-    setIsAuth(!isAuth);
   };
 
   const buttonClassName = `header__theme ${currentTheme.theme ? 'header__theme_dark' : 'header__theme_light'}`;

@@ -1,9 +1,10 @@
 import { History } from '../../components/History/Histoty';
 import { useAppSelector } from '../../store/hook';
+import { getHistory } from '../../store/slice/historySlice';
 import './HistoryPage.css';
 
 export const HistoryPage = () => {
-  const historyList = useAppSelector((state) => state.history.historyQuery);
+  const historyList = useAppSelector(getHistory);
   const isEmty: boolean = historyList.length === 0;
   const content = historyList.map((post: string, index: number) => <History post={post} key={post + index} />);
 

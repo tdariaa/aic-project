@@ -2,8 +2,9 @@ import { useNavigate, useParams } from 'react-router';
 import { useGetArtworkByIdQuery } from '../../store/api/api';
 import { PictureItemFront, transformPictureItemById } from '../../utils/transformTypes';
 import './Item.css';
-import { toggleFavoriteItem } from '../../store/slice/favotiteSlice';
+import { getFavorite, toggleFavoriteItem } from '../../store/slice/favotiteSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { getEmail } from '../../store/slice/authenticationSlice';
 
 export interface PictureItemByIdFront extends PictureItemFront {
   description: string;
@@ -20,8 +21,8 @@ export const Item = () => {
   const navigate = useNavigate();
   const { data, isLoading, isSuccess, isError } = useGetArtworkByIdQuery(param.id);
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector((state) => state.authentication.email);
-  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  const userEmail = useAppSelector(getEmail);
+  const favoriteList = useAppSelector(getFavorite);
   let isFav: boolean;
   let content: JSX.Element | undefined;
   let frontItem: PictureItemByIdFront;
@@ -59,7 +60,7 @@ export const Item = () => {
               Назад
             </button>
             <button className='item__button item__button_fav' onClick={() => handleClick(frontItem, userEmail)}>
-              {isFav ? 'Удалить' : 'В избранное'}
+              {isFav && userEmail ? 'Удалить' : 'В избранное'}
             </button>
           </div>
         </div>

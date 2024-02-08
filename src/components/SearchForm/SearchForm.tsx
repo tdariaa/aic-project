@@ -6,16 +6,19 @@ import { addHistoryItem } from '../../store/slice/historySlice';
 
 import './SearchForm.css';
 import { useDebounce } from '../../hooks/useDebounce';
+import { getEmail } from '../../store/slice/authenticationSlice';
 
 export const SearchForm = () => {
   const location = useLocation();
   const queryParam = new URLSearchParams(location.search).get('query');
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector((state) => state.authentication.email);
+  const userEmail = useAppSelector(getEmail);
   const [value, setValue] = React.useState(queryParam || '');
   const debouncedSearchTerm = useDebounce(value, 500);
   const [isOpen, setIsOpen] = React.useState(false);
-  const { data: items } = useGetArtworkBySearchQuery(debouncedSearchTerm, { skip: value.trim().length < 0 });
+  const { data: items } = useGetArtworkBySearchQuery(debouncedSearchTerm || queryParam, {
+    skip: value.trim().length <= 0,
+  });
 
   const navigate = useNavigate();
 
