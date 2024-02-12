@@ -5,11 +5,12 @@ import { useAppSelector, useAppDispatch } from '../../store/hook';
 import { deleteHistoryItem } from '../../store/slice/historySlice';
 import { HistoryProps } from '../../types/types';
 import './History.css';
+import { getEmail } from '../../store/slice/authenticationSlice';
 
 export const History = ({ post }: HistoryProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const userEmail = useAppSelector((state) => state.authentication.email);
+  const userEmail = useAppSelector(getEmail);
 
   const handleDeletePost = (post: string, userEmail?: string) => {
     if (userEmail) {

@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../store/hook';
 import { CardSection } from '../../components/CardSection/CardSection';
 import './FavoritePage.css';
+import { getFavorite } from '../../store/slice/favotiteSlice';
 
 export interface PictureItemFront {
   id: string;
@@ -13,7 +14,7 @@ export interface PictureItemFront {
 }
 
 export const FavoritePage = () => {
-  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  const favoriteList = useAppSelector(getFavorite);
   const isEmty: boolean = favoriteList.length === 0;
   return (
     <main className='main'>

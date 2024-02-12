@@ -2,13 +2,14 @@ import './Card.css';
 import { useNavigate } from 'react-router';
 import { PictureItemFront } from '../../utils/transformTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { toggleFavoriteItem } from '../../store/slice/favotiteSlice';
+import { getFavorite, toggleFavoriteItem } from '../../store/slice/favotiteSlice';
+import { getEmail } from '../../store/slice/authenticationSlice';
 
 export const Card = (card: PictureItemFront) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const userEmail = useAppSelector((state) => state.authentication.email);
-  const favoriteList = useAppSelector((state) => state.favorite.favoriteQuery);
+  const userEmail = useAppSelector(getEmail);
+  const favoriteList = useAppSelector(getFavorite);
   const isFav = favoriteList.some((item: PictureItemFront) => item.id === card.id);
 
   const handleClick = (card: PictureItemFront, email?: string) => {
@@ -30,7 +31,7 @@ export const Card = (card: PictureItemFront) => {
       <p className='card__title'>{card.artistTitle}</p>
       <p className='card__title'>{card.artworkTypeTitle}</p>
       <button className='card__button card__button_like' onClick={() => handleClick(card, userEmail)}>
-        {isFav ? 'Удалить' : 'В избранное'}
+        {isFav && userEmail ? 'Удалить' : 'В избранное'}
       </button>
       <button
         className='card__button card__button_info'

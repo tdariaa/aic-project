@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PictureItemFront } from '../../utils/transformTypes';
 import { getFavoriteItemsFromLS } from '../../utils/localStorageUtils';
+import { RootState } from '../index';
 
 export interface FavoriteState {
   favoriteQuery: PictureItemFront[];
@@ -44,6 +45,8 @@ export const favoriteSlice = createSlice({
     },
   },
 });
+
+export const getFavorite = (state: RootState) => state.favorite.favoriteQuery;
 
 export const { toggleFavoriteItem, getFavoriteItem, updateFavoriteItems } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

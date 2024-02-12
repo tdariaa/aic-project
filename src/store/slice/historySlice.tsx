@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PictureItemFront } from '../../utils/transformTypes';
 import { getParseItemsLS } from '../../utils/localStorageUtils';
+import { RootState } from '../index';
 
 export type searchQuery = string;
 
@@ -53,6 +54,8 @@ export const historySlice = createSlice({
     },
   },
 });
+
+export const getHistory = (state: RootState) => state.history.historyQuery;
 
 export const { addHistoryItem, deleteHistoryItem, updateHistoryItem, getHistoryItem } = historySlice.actions;
 export default historySlice.reducer;
